@@ -1,0 +1,111 @@
+/* General body and layout styling */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Navbar Customization */
+.navbar {
+  background-color: #6e7377; /* Custom color */
+}
+
+.navbar-dark .navbar-brand {
+  color: #f7f7f7; /* Custom brand color */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #f7f7f7; /* Custom link color */
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #d4d4d4; /* Hover color */
+}
+
+/* Override Bootstrap Button */
+.btn-primary {
+  background-color: #6e7377; /* Custom button color */
+  border-color: #6e7377;
+}
+
+.btn-primary:hover {
+  background-color: #555;
+  border-color: #555;
+}
+
+/* Centering container for the login and form pages */
+.d-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7f7f7;
+}
+
+.card-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Form Styles */
+.form-control {
+  margin-bottom: 1rem;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.btn {
+  padding: 12px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+/* Pet List Styling */
+.container {
+  margin-top: 20px;
+}
+
+.pet-list .card {
+  margin-bottom: 20px;
+}
+
+.pet-list .card h5 {
+  color: #333;
+}
+
+.pet-list .card p {
+  color: #555;
+}
+
+/* Utility classes for customizations */
+.text-center {
+  text-align: center;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.shadow-sm {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
