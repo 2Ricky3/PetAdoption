@@ -109,3 +109,145 @@ h1 {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Global body settings */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+}
+
+/* Sign Up container */
+.sign-up-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+/* Left side form section */
+.left-section {
+  width: 50%;
+  background-color: #3a4856;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+.left-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #f7f7f7;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-control {
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.btn-primary {
+  background-color: #a57d7b;
+  border-color: #a57d7b;
+}
+
+.btn-primary:hover {
+  background-color: #8a6260;
+}
+
+/* Right side logo section */
+.right-section {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+}
+
+.logo {
+  width: 200px;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  color: #3a4856;
+  font-size: 2rem;
+}
+
+
+/* Global body settings */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+}
+
+/* Login container */
+.login-container {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+/* Left side form section */
+.left-section {
+  width: 50%;
+  background-color: #3a4856;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+.left-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #f7f7f7;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-control {
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.btn-primary {
+  background-color: #a57d7b;
+  border-color: #a57d7b;
+}
+
+.btn-primary:hover {
+  background-color: #8a6260;
+}
+
+/* Right side logo section */
+.right-section {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+}
+
+.logo {
+  width: 200px;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  color: #3a4856;
+  font-size: 2rem;
+}
