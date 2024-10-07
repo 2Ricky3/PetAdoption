@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -14,7 +16,7 @@ const LoginPage = () => {
       });
       if (response.status === 200) {
         alert('Login successful!');
-        window.location.href = '/pets';
+        navigate('/home'); // Redirect to home page after successful login
       }
     } catch (error) {
       alert('Login failed. Please try again.');
@@ -52,3 +54,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
