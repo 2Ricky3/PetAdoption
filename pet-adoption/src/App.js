@@ -3,8 +3,7 @@ import AuthPage from './components/AuthPage';
 import HomePage from './components/HomePage';
 import CentresPage from './components/CentresPage';
 import PublishPage from './components/PublishPage';
-
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -13,8 +12,7 @@ function App() {
         <Route path="/" element={<AuthPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/centres" element={<CentresPage />} />
-        <Route path="/publish" element={<PublishPage />} /> {/* New Route */}
-
+        <Route path="/publish" element={<PublishPage />} />
       </Routes>
     </Router>
   );

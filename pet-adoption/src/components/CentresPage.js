@@ -1,28 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar, Nav, Button, Card, Container, Row, Col } from 'react-bootstrap';
 import './HomePage.css'; // Use similar styling as HomePage
 
 const CentresPage = () => {
-  const centres = [
+  const initialCentres = [
     {
       name: 'Fisher Centre',
       description: 'A modern and spacious facility with a dedicated play area for animals, offering a welcoming environment for adopting pets.',
-      distance: '12 Km',
-      image: 'url-to-image-fisher', // Replace with actual image URL
+      distance: 12, // Store distance as a number for sorting
+      image: '/assets/download (5).jpg', // Correct path to Fisher Centre image
     },
     {
       name: 'Paws Centre',
       description: 'A vibrant and lively center, filled with large displays of adorable pets waiting to be adopted.',
-      distance: '18 Km',
-      image: 'url-to-image-paws', // Replace with actual image URL
+      distance: 18, // Store distance as a number for sorting
+      image: '/assets/download (6).jpg', // Correct path to Paws Centre image
     },
     {
       name: 'Tri-City Centre',
       description: 'A cosy and charming adoption centre nestled in a quiet area, offering a variety of pets looking for loving homes.',
-      distance: '25 Km',
-      image: 'url-to-image-tri-city', // Replace with actual image URL
+      distance: 25, // Store distance as a number for sorting
+      image: '/assets/download (7).jpg', // Correct path to Tri-City Centre image
     },
   ];
+
+  const [centres, setCentres] = useState(initialCentres); // Use state to store centres
+
+  // Sorting Centres alphabetically (A-Z)
+  const sortAlphabetically = () => {
+    const sortedCentres = [...centres].sort((a, b) => a.name.localeCompare(b.name));
+    setCentres(sortedCentres);
+  };
+
+  // Sorting Centres by distance (nearest first)
+  const sortByDistance = () => {
+    const sortedCentres = [...centres].sort((a, b) => a.distance - b.distance);
+    setCentres(sortedCentres);
+  };
 
   return (
     <div>
@@ -48,8 +62,8 @@ const CentresPage = () => {
 
       {/* Filter Buttons */}
       <Container className="text-center my-3">
-        <Button variant="outline-secondary">A-Z</Button>{' '}
-        <Button variant="outline-secondary">Nearby</Button>
+        <Button variant="outline-secondary" onClick={sortAlphabetically}>A-Z</Button>{' '}
+        <Button variant="outline-secondary" onClick={sortByDistance}>Nearby</Button>
       </Container>
 
       {/* Centre Cards */}
@@ -58,11 +72,15 @@ const CentresPage = () => {
           {centres.map((centre, index) => (
             <Col key={index} sm={12} md={4} className="mb-4">
               <Card>
-                <Card.Img variant="top" src={centre.image} />
+                <Card.Img 
+                  variant="top" 
+                  src={centre.image} 
+                  style={{ borderRadius: '20px' }} // Adding border-radius to the images
+                />
                 <Card.Body>
                   <Card.Title>{centre.name}</Card.Title>
                   <Card.Text>{centre.description}</Card.Text>
-                  <Button variant="secondary" disabled>{centre.distance}</Button>
+                  <Button variant="secondary" disabled>{`${centre.distance} Km`}</Button>
                 </Card.Body>
               </Card>
             </Col>

@@ -6,25 +6,28 @@ const PublishPage = () => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [breed, setBreed] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null); // To store the image file
 
   const handlePublish = async (e) => {
     e.preventDefault();
+
+    // Creating a formData object to hold the input data, including the image file
     const formData = new FormData();
     formData.append('name', name);
     formData.append('age', age);
     formData.append('breed', breed);
-    formData.append('image', image);  // Adding the image to FormData
+    formData.append('image', image); // Append the image file
 
     try {
-      const response = await axios.post('http://localhost:5000/api/pets', formData, {
+      const response = await axios.post('http://localhost:5000/api/pets/publish', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data', // Specify content type for file uploads
         },
       });
+
       if (response.status === 201) {
         alert('Pet published successfully!');
-        window.location.href = '/home';
+        window.location.href = '/home'; // Redirect to home after success
       }
     } catch (error) {
       console.error('Error publishing pet:', error);
@@ -34,8 +37,8 @@ const PublishPage = () => {
 
   return (
     <div className="publish-container">
+      <h2>Post a Dog</h2>
       <form onSubmit={handlePublish}>
-        <h2>Post a Dog</h2>
         <div className="form-group">
           <label>Name</label>
           <input
@@ -49,7 +52,7 @@ const PublishPage = () => {
         <div className="form-group">
           <label>Age</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             value={age}
             onChange={(e) => setAge(e.target.value)}
@@ -71,11 +74,11 @@ const PublishPage = () => {
           <input
             type="file"
             className="form-control"
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={(e) => setImage(e.target.files[0])} // Store selected file
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary btn-block">Publish</button>
+        <button type="submit" className="btn btn-primary">Publish</button>
       </form>
     </div>
   );

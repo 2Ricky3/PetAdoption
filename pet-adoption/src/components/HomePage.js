@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Button, Card, Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import './HomePage.css';
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
@@ -21,10 +22,18 @@ const HomePage = () => {
   return (
     <div>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">Pen Pets</Navbar.Brand>
+        <Navbar.Brand href="/home">
+          <img
+            src="/assets/logo.png"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            alt="Logo"
+          />
+          {' Pen Pets'}
+        </Navbar.Brand>
         <Nav className="ml-auto">
           <Nav.Link href="/publish">Publish</Nav.Link>
-          <Nav.Link href="/browse">Browse</Nav.Link>
           <Nav.Link href="/centres">Centres</Nav.Link>
           <Button variant="outline-light">Logout</Button>
         </Nav>
@@ -38,13 +47,14 @@ const HomePage = () => {
 
       <Container>
         <Row>
-          {pets.map((pet) => (
-            <Col key={pet._id} sm={12} md={4} className="mb-4">
+          {pets.map((pet, index) => (
+            <Col key={index} sm={12} md={4} className="mb-4">
               <Card>
-                <Card.Img variant="top" src={`http://localhost:5000/uploads/${pet.image}`} />
+                <Card.Img variant="top" src={pet.image} alt={pet.name} />
                 <Card.Body>
                   <Card.Title>{pet.name}</Card.Title>
-                  <Card.Text>{pet.description}</Card.Text>
+                  <Card.Text>Age: {pet.age}</Card.Text>
+                  <Card.Text>Breed: {pet.breed}</Card.Text>
                   <Button variant="success" className="mr-2">Like</Button>
                   <Button variant="primary">Adopt</Button>
                 </Card.Body>
