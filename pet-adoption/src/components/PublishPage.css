@@ -1,0 +1,15 @@
+.publish-container {
+    background: url('../assets/background.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 40px;
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  form {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

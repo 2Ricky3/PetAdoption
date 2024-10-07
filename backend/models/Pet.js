@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
 
-const petSchema = new mongoose.Schema({
+const PetSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  age: { type: Number, required: true },
+  age: { type: String, required: true },
   breed: { type: String, required: true },
-  description: String,
-  postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  likedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+  image: { type: String, required: true }  // Store the image filename
 });
 
-module.exports = mongoose.model('Pet', petSchema);
+module.exports = mongoose.model('Pet', PetSchema);

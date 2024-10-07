@@ -1,85 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar, Nav, Button, Card, Container, Row, Col } from 'react-bootstrap';
-import './HomePage.css'; // Custom CSS for additional styling
+import axios from 'axios';
 
 const HomePage = () => {
-  const [pets, setPets] = useState([
-    {
-      name: 'Jason',
-      description: 'A tiny, caramel-colored puppy with a soft, fluffy coat and big, curious eyes.',
-      age: 1,
-      image: 'url-to-image-jason', // Replace with actual image URL
-    },
-    {
-      name: 'Ruby',
-      description: 'Ruby is a snow-white fluffball, radiating joy as she sticks out her little pink tongue.',
-      age: 2,
-      image: 'url-to-image-ruby', // Replace with actual image URL
-    },
-    {
-      name: 'Luls',
-      description: 'Luls, with his stout body and charming beagle-like look, confidently tilts his head upward.',
-      age: 3,
-      image: 'url-to-image-luls', // Replace with actual image URL
-    },
-  ]);
+  const [pets, setPets] = useState([]);
 
-  const sortByName = () => {
-    const sorted = [...pets].sort((a, b) => a.name.localeCompare(b.name));
-    setPets(sorted);
-  };
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/pets');
+        setPets(response.data);
+      } catch (error) {
+        console.error('Error fetching pets:', error);
+      }
+    };
 
-  const sortByAge = () => {
-    const sorted = [...pets].sort((a, b) => a.age - b.age);
-    setPets(sorted);
-  };
-
-  const handleLogout = () => {
-    // Clear any session or token here
-    window.location.href = '/';
-  };
+    fetchPets();
+  }, []);
 
   return (
     <div>
-      {/* Navbar */}
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home">
-          <img
-            src="/assets/logo.png" // Ensure the logo path is correct
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-            alt="Logo"
-          />
-          {' Pen Pets'}
-        </Navbar.Brand>
+        <Navbar.Brand href="#home">Pen Pets</Navbar.Brand>
         <Nav className="ml-auto">
-          <Nav.Link href="#publish">Publish</Nav.Link>
-          <Nav.Link href="#browse">Browse</Nav.Link>
+          <Nav.Link href="/publish">Publish</Nav.Link>
+          <Nav.Link href="/browse">Browse</Nav.Link>
           <Nav.Link href="/centres">Centres</Nav.Link>
-          <Button variant="outline-light" onClick={handleLogout}>Logout</Button>
+          <Button variant="outline-light">Logout</Button>
         </Nav>
       </Navbar>
 
-      {/* Filter Buttons */}
       <Container className="text-center my-3">
-        <Button variant="outline-secondary" onClick={sortByName}>A-Z</Button>{' '}
-        <Button variant="outline-secondary" onClick={sortByAge}>Age</Button>{' '}
+        <Button variant="outline-secondary">A-Z</Button>{' '}
+        <Button variant="outline-secondary">Age</Button>{' '}
         <Button variant="outline-secondary">Filter</Button>
       </Container>
 
-      {/* Pet Cards */}
       <Container>
         <Row>
-          {pets.map((pet, index) => (
-            <Col key={index} sm={12} md={4} className="mb-4">
+          {pets.map((pet) => (
+            <Col key={pet._id} sm={12} md={4} className="mb-4">
               <Card>
-                <Card.Img variant="top" src={pet.image} />
+                <Card.Img variant="top" src={`http://localhost:5000/uploads/${pet.image}`} />
                 <Card.Body>
                   <Card.Title>{pet.name}</Card.Title>
                   <Card.Text>{pet.description}</Card.Text>
-                  <Button variant="success" className="mr-2 mb-2">Like</Button>
-                  <Button variant="primary" className="mb-2">Adopt</Button>
+                  <Button variant="success" className="mr-2">Like</Button>
+                  <Button variant="primary">Adopt</Button>
                 </Card.Body>
               </Card>
             </Col>
