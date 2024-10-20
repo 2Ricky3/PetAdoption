@@ -1,37 +1,42 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import SignUpPage from './SignUpPage';
-import './AuthPage.css'; // Still have the custom CSS for minor adjustments
+import './AuthPage.css';
 
 const AuthPage = () => {
-  const [showSignUp, setShowSignUp] = useState(false);
+  const [isLogin, setIsLogin] = useState(true); // State to switch between login and signup
+  const navigate = useNavigate();
+
+  const handleSwitchToSignUp = () => {
+    setIsLogin(false);
+    navigate('/signup'); // Redirect to signup page
+  };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="auth-box p-4 bg-light shadow rounded">
-        <div className="d-flex justify-content-center mb-4">
-          <label className="mr-3">
-            <input
-              type="radio"
-              value="login"
-              checked={!showSignUp}
-              onChange={() => setShowSignUp(false)}
-              className="mr-1"
-            />
-            Login
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="signup"
-              checked={showSignUp}
-              onChange={() => setShowSignUp(true)}
-              className="mr-1"
-            />
-            Sign Up
-          </label>
+    <div className="auth-container">
+      <div className="auth-card card">
+        <div className="card-body">
+          <h2 className="text-center">
+            {isLogin ? 'Login' : 'Sign Up'}
+          </h2>
+          <div className="form-switch-container">
+            <button 
+              className={`btn ${isLogin ? 'btn-primary' : 'btn-outline-secondary'}`} 
+              onClick={() => setIsLogin(true)}>
+              Login
+            </button>
+            <button 
+              className={`btn ${!isLogin ? 'btn-primary' : 'btn-outline-secondary'}`} 
+              onClick={() => setIsLogin(false)}>
+              Sign Up
+            </button>
+          </div>
+          {isLogin ? <LoginPage /> : <SignUpPage />}
+          <p className="text-center">
+            Don't have an account? <span onClick={handleSwitchToSignUp}>Sign Up</span>
+          </p>
         </div>
-        {showSignUp ? <SignUpPage /> : <LoginPage />}
       </div>
     </div>
   );

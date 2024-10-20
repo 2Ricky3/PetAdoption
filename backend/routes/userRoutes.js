@@ -1,43 +1,51 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken'); // To handle token creation for login
-const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User'); // Assuming you have a User model
 const router = express.Router();
 
-// User Registration
+// Sign-up route
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
 
-  // Check if the user already exists
-  const existingUser = await User.findOne({ email });
-  if (existingUser) return res.status(400).send('User already exists');
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
 
-  // Hash the password
-  const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const newUser = new User({ username, email, password: hashedPassword });
 
-  // Create and save new user
-  const user = new User({ username, email, password: hashedPassword });
-  await user.save();
-
-  res.status(201).send('User registered successfully');
+    await newUser.save();
+    res.status(201).json({ message: 'User registered successfully!' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error registering user' });
+  }
 });
 
-// User Login Route
+// Login route
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  // Check if the user exists
-  const user = await User.findOne({ email });
-  if (!user) return res.status(400).send('User not found');
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'User does not exist' });
+    }
 
-  // Check if the password is correct
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) return res.status(400).send('Invalid credentials');
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
 
-  // Generate a token (assuming JWT is used for authentication)
-  const token = jwt.sign({ id: user._id, role: user.role }, 'jwtSecretKey', { expiresIn: '1h' });
+    // Generate JWT
+    const token = jwt.sign({ email: user.email, id: user._id }, 'your_jwt_secret_key', { expiresIn: '1h' });
 
-  res.status(200).json({ token, user: { id: user._id, username: user.username, email: user.email } });
+    res.status(200).json({ result: user, token });
+  } catch (error) {
+    res.status(500).json({ message: 'Error logging in' });
+  }
 });
 
 module.exports = router;

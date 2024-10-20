@@ -1,18 +1,24 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AuthPage from './components/AuthPage';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './components/HomePage';
-import CentresPage from './components/CentresPage';
 import PublishPage from './components/PublishPage';
+import CentresPage from './components/CentresPage';
+import LoginPage from './components/LoginPage';
+import SignUpPage from './components/SignUpPage'; // Add your SignUpPage
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<AuthPage />} />
+        {/* Default route to login page */}
+        <Route path="/" element={<Navigate to="/login" />} />
+        
         <Route path="/home" element={<HomePage />} />
-        <Route path="/centres" element={<CentresPage />} />
         <Route path="/publish" element={<PublishPage />} />
+        <Route path="/centres" element={<CentresPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} /> {/* Ensure SignUpPage works */}
       </Routes>
     </Router>
   );

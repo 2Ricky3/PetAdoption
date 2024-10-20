@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path');
-const petRoutes = require('./routes/petRoutes');
+const userRoutes = require('./routes/userRoutes'); // Import user routes
+const petRoutes = require('./routes/petRoutes'); // Import pet routes
+
 
 const app = express();
 app.use(express.json());
@@ -16,11 +17,11 @@ mongoose.connect('mongodb+srv://admin:2003@cluster0.nwsv0.mongodb.net/petAdoptio
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Serve static files from uploads folder
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 // Routes
-app.use('/api/pets', petRoutes);
+app.use('/api/users', userRoutes); // User routes
+app.use('/api/pets', petRoutes); // This should match the API call in the frontend
+app.use('/uploads', express.static('uploads'));
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

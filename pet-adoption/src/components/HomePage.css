@@ -6,3 +6,99 @@
 .card img {
   border-radius: 10px 10px 0 0;
 }
+.custom-button {
+  /* Variables */
+  --button-radius: 0.75em;
+  --button-color: #e8e8e8;
+  --button-outline-color: #000000;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--button-radius);
+  background: var(--button-outline-color);
+  display: inline-block;
+  margin-right: 10px; /* Add space between buttons */
+  position: relative;
+}
+
+.button_top {
+  display: block;
+  box-sizing: border-box;
+  border: 2px solid var(--button-outline-color);
+  border-radius: var(--button-radius);
+  padding: 0.75em 1.5em;
+  background: var(--button-color);
+  color: var(--button-outline-color);
+  transform: translateY(-0.2em);
+  transition: transform 0.1s ease;
+}
+
+.custom-button:hover .button_top {
+  transform: translateY(-0.33em);
+}
+
+.custom-button:active .button_top {
+  transform: translateY(0);
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+  position: relative; /* Relative for heart positioning */
+}
+
+/* Heart animation style */
+.heart-animation {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  bottom: 50px; /* Position it above the button */
+  left: 20px; /* Adjust horizontally to be centered above the button */
+  animation: pop-heart 1s ease-in-out forwards;
+}
+
+/* CSS heart shape using pseudo-elements */
+.heart-animation::before,
+.heart-animation::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart-animation::before {
+  top: -15px;
+  left: 0;
+}
+
+.heart-animation::after {
+  left: 15px;
+  top: 0;
+}
+
+.heart-animation {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  transform: rotate(-45deg);
+  background: red;
+  animation: pop-heart 1s ease-in-out forwards;
+}
+
+@keyframes pop-heart {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5) translateY(-20px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1) translateY(-50px);
+  }
+}
