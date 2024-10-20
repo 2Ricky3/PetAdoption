@@ -6,12 +6,11 @@ const PublishPage = () => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [breed, setBreed] = useState('');
-  const [image, setImage] = useState(null); // To store the image file
+  const [image, setImage] = useState(null); // For storing the image file
 
   const handlePublish = async (e) => {
     e.preventDefault();
 
-    // Creating a formData object to hold the input data, including the image file
     const formData = new FormData();
     formData.append('name', name);
     formData.append('age', age);
@@ -21,13 +20,13 @@ const PublishPage = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/pets/publish', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Specify content type for file uploads
-        },
+          'Content-Type': 'multipart/form-data'
+        }
       });
 
       if (response.status === 201) {
         alert('Pet published successfully!');
-        window.location.href = '/home'; // Redirect to home after success
+        window.location.href = '/home';
       }
     } catch (error) {
       console.error('Error publishing pet:', error);
@@ -74,7 +73,7 @@ const PublishPage = () => {
           <input
             type="file"
             className="form-control"
-            onChange={(e) => setImage(e.target.files[0])} // Store selected file
+            onChange={(e) => setImage(e.target.files[0])} // Capture the image file
             required
           />
         </div>

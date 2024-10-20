@@ -3,6 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const Pet = require('../models/Pet');  // Assuming you have a Pet model
 
+
 const router = express.Router();
 
 // Set up multer storage for image uploads

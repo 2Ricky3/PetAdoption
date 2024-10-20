@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 
-const PetSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  age: { type: String, required: true },
-  breed: { type: String, required: true },
-  image: { type: String, required: true }  // Store the image filename
+const petSchema = new mongoose.Schema({
+  name: String,
+  age: Number,
+  breed: String,
+  image: String, // Path to the image file
 });
 
-module.exports = mongoose.model('Pet', PetSchema);
+const Pet = mongoose.model('Pet', petSchema);
+
+module.exports = Pet;

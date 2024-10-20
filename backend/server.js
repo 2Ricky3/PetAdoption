@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-const userRoutes = require('./routes/userRoutes');
 const petRoutes = require('./routes/petRoutes');
 
 const app = express();
@@ -17,11 +16,10 @@ mongoose.connect('mongodb+srv://admin:2003@cluster0.nwsv0.mongodb.net/petAdoptio
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Serve static files from the assets directory
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+// Serve static files from uploads folder
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// API routes
-app.use('/api/users', userRoutes);
+// Routes
 app.use('/api/pets', petRoutes);
 
 const PORT = process.env.PORT || 5000;
