@@ -2,41 +2,35 @@ import React, { useState } from 'react';
 import { Navbar, Nav, Button, Card, Container, Row, Col } from 'react-bootstrap';
 import './HomePage.css'; // Use similar styling as HomePage
 
+// Importing the images
+import fisherCentreImage from '../assets/download (5).jpg';
+import pawsCentreImage from '../assets/download (6).jpg';
+import triCityCentreImage from '../assets/download (7).jpg';
+import logo from '../assets/logo.png'; // Import the logo image
+
 const CentresPage = () => {
   const initialCentres = [
     {
       name: 'Fisher Centre',
       description: 'A modern and spacious facility with a dedicated play area for animals, offering a welcoming environment for adopting pets.',
-      distance: 12, // Store distance as a number for sorting
-      image: '/assets/download (5).jpg', // Correct path to Fisher Centre image
+      distance: 12, 
+      image: fisherCentreImage, 
     },
     {
       name: 'Paws Centre',
       description: 'A vibrant and lively center, filled with large displays of adorable pets waiting to be adopted.',
-      distance: 18, // Store distance as a number for sorting
-      image: '/assets/download (6).jpg', // Correct path to Paws Centre image
+      distance: 18, 
+      image: pawsCentreImage, 
     },
     {
       name: 'Tri-City Centre',
       description: 'A cosy and charming adoption centre nestled in a quiet area, offering a variety of pets looking for loving homes.',
-      distance: 25, // Store distance as a number for sorting
-      image: '/assets/download (7).jpg', // Correct path to Tri-City Centre image
+      distance: 25, 
+      image: triCityCentreImage, 
     },
   ];
 
-  const [centres, setCentres] = useState(initialCentres); // Use state to store centres
-
-  // Sorting Centres alphabetically (A-Z)
-  const sortAlphabetically = () => {
-    const sortedCentres = [...centres].sort((a, b) => a.name.localeCompare(b.name));
-    setCentres(sortedCentres);
-  };
-
-  // Sorting Centres by distance (nearest first)
-  const sortByDistance = () => {
-    const sortedCentres = [...centres].sort((a, b) => a.distance - b.distance);
-    setCentres(sortedCentres);
-  };
+  const [centres] = useState(initialCentres); 
 
   return (
     <div>
@@ -44,9 +38,9 @@ const CentresPage = () => {
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="/home">
           <img
-            src="/assets/logo.png" // Ensure the logo path is correct
-            width="30"
-            height="30"
+            src={logo} // Use the imported logo image
+            width="50"
+            height="50"
             className="d-inline-block align-top"
             alt="Logo"
           />
@@ -60,22 +54,16 @@ const CentresPage = () => {
         </Nav>
       </Navbar>
 
-      {/* Filter Buttons */}
-      <Container className="text-center my-3">
-        <Button variant="outline-secondary" onClick={sortAlphabetically}>A-Z</Button>{' '}
-        <Button variant="outline-secondary" onClick={sortByDistance}>Nearby</Button>
-      </Container>
-
       {/* Centre Cards */}
-      <Container>
+      <Container className="mt-5">
         <Row>
           {centres.map((centre, index) => (
             <Col key={index} sm={12} md={4} className="mb-4">
-              <Card>
+              <Card className="h-100">
                 <Card.Img 
                   variant="top" 
                   src={centre.image} 
-                  style={{ borderRadius: '20px' }} // Adding border-radius to the images
+                  style={{ borderRadius: '20px', height: '250px', objectFit: 'cover' }} // Consistent image size
                 />
                 <Card.Body>
                   <Card.Title>{centre.name}</Card.Title>

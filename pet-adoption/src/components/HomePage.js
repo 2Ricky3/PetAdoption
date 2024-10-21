@@ -7,12 +7,14 @@ import './HomePage.css'; // Include the custom CSS file for styling
 const HomePage = () => {
   const [pets, setPets] = useState([]);
   const [heartAnimation, setHeartAnimation] = useState({});
+  const [sortedPets, setSortedPets] = useState([]); // To store sorted pets
 
   useEffect(() => {
     const fetchPets = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/pets');
         setPets(response.data);
+        setSortedPets(response.data); // Initialize sortedPets
       } catch (error) {
         console.error('Error fetching pets:', error);
       }
@@ -28,14 +30,32 @@ const HomePage = () => {
     }, 1000); // Heart disappears after 1 second
   };
 
+  // Sorting function for A-Z
+  const sortAlphabetically = () => {
+    const sorted = [...pets].sort((a, b) => a.name.localeCompare(b.name));
+    setSortedPets(sorted); // Update the sortedPets state
+  };
+
+  // Sorting function for age
+  const sortByAge = () => {
+    const sorted = [...pets].sort((a, b) => a.age - b.age);
+    setSortedPets(sorted); // Update the sortedPets state
+  };
+
   return (
     <div>
       {/* Include Navbar */}
       <NavbarComponent />
 
+      {/* Filter Buttons */}
+      <Container className="text-center my-3">
+        <Button variant="outline-secondary" onClick={sortAlphabetically}>Sort A-Z</Button>{' '}
+        <Button variant="outline-secondary" onClick={sortByAge}>Sort by Age</Button>
+      </Container>
+
       <Container className="my-4">
         <Row>
-          {pets.map((pet) => (
+          {sortedPets.map((pet) => (
             <Col key={pet._id} sm={12} md={4} className="mb-4">
               <Card>
                 <Card.Img variant="top" src={`http://localhost:5000/${pet.image}`} />

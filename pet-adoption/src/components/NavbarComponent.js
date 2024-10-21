@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 const NavbarComponent = () => {
   const navigate = useNavigate();
@@ -12,18 +13,18 @@ const NavbarComponent = () => {
 
   return (
     <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href="/home">
+      <Navbar.Brand href="/home" className="navbar-brand-custom">
         <img
-          src="/assets/logo.png" // Ensure this path is correct
-          width="30"
-          height="30"
+          src={logo}
+          width="50"
+          height="50"
           className="d-inline-block align-top"
           alt="Logo"
         />
-        {' Pen Pets'}
+        <span className="brand-text"> Pen Pets</span>
       </Navbar.Brand>
       <Nav className="ml-auto">
-        <Nav.Link href="/publish">Publish</Nav.Link> {/* Link to /publish */}
+        <Nav.Link href="/publish">Publish</Nav.Link>
         <Nav.Link href="/home">Browse</Nav.Link>
         <Nav.Link href="/centres">Centres</Nav.Link>
         <Button variant="outline-light" onClick={handleLogout}>Logout</Button>

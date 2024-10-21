@@ -1,0 +1,11 @@
+.navbar-brand-custom {
+    display: flex;
+    align-items: center;
+  }
+  
+  .brand-text {
+    margin-left: 10px; /* Adds space between the logo and the text */
+    font-size: 1.5rem; /* Adjust font size */
+    vertical-align: middle;
+  }
+  
