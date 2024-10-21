@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Container, Row, Col, Button } from 'react-bootstrap';
 import NavbarComponent from './NavbarComponent'; // Import the reusable navbar
+import FooterComponent from './FooterComponent'; // Import the Footer
 import './HomePage.css'; // Include the custom CSS file for styling
 
 const HomePage = () => {
@@ -22,6 +23,11 @@ const HomePage = () => {
     fetchPets();
   }, []);
 
+  useEffect(() => {
+    // Always update sortedPets when pets change, if required
+    setSortedPets(pets);
+  }, [pets]);
+
   const handleLike = (id) => {
     // Trigger heart animation for the specific pet
     setHeartAnimation((prev) => ({ ...prev, [id]: true }));
@@ -32,18 +38,21 @@ const HomePage = () => {
 
   // Sorting function for A-Z
   const sortAlphabetically = () => {
-    const sorted = [...pets].sort((a, b) => a.name.localeCompare(b.name));
+    const sorted = [...sortedPets].sort((a, b) => a.name.localeCompare(b.name));
     setSortedPets(sorted); // Update the sortedPets state
+    console.log("Sorted Alphabetically:", sorted);
   };
 
   // Sorting function for age
   const sortByAge = () => {
-    const sorted = [...pets].sort((a, b) => a.age - b.age);
+    const sorted = [...sortedPets].sort((a, b) => a.age - b.age);
     setSortedPets(sorted); // Update the sortedPets state
+    console.log("Sorted by Age:", sorted);
   };
 
   return (
     <div>
+      {console.log('Rendered Pets:', sortedPets)} {/* Check if sortedPets is changing */}
       {/* Include Navbar */}
       <NavbarComponent />
 
@@ -83,6 +92,9 @@ const HomePage = () => {
           ))}
         </Row>
       </Container>
+
+      {/* Include Footer */}
+      <FooterComponent />
     </div>
   );
 };
