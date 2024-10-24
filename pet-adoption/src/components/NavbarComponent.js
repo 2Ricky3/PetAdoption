@@ -7,7 +7,12 @@ const NavbarComponent = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    // Clear authentication token or session data
+    localStorage.removeItem('authToken');
+    
     alert('Logging out...');
+
+    // Redirect to login page
     navigate('/login');
   };
 
