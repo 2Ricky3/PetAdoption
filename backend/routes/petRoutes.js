@@ -4,6 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const router = express.Router();
 const Pet = require('../models/Pet');
+const authAdmin = require('../middleware/authAdmin'); // Import the authAdmin middleware
+
+
 
 // Multer setup for image uploads
 const storage = multer.diskStorage({
@@ -17,6 +20,7 @@ const storage = multer.diskStorage({
     cb(null, uniqueSuffix + '-' + file.originalname);
   }
 });
+
 
 const upload = multer({ storage: storage });
 
@@ -36,6 +40,16 @@ router.post('/publish', upload.single('image'), async (req, res) => {
   }
 });
 
+// Admin route to remove pets
+router.delete('/admin/remove-pet/:id', authAdmin, async (req, res) => {
+  try {
+    await Pet.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Pet deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting pet' });
+  }
+});
+
 // Route to fetch all pets
 router.get('/', async (req, res) => {
   try {
@@ -45,5 +59,6 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch pets' });
   }
 });
+
 
 module.exports = router;

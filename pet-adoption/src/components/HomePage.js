@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Card, Container, Row, Col, Button } from 'react-bootstrap';
-import NavbarComponent from './NavbarComponent'; // Import the reusable navbar
-import FooterComponent from './FooterComponent'; // Import the Footer
-import './HomePage.css'; // Include the custom CSS file for styling
+import { Carousel, Card, Button, Container } from 'react-bootstrap';
+import NavbarComponent from './NavbarComponent';
+import FooterComponent from './FooterComponent';
+import './HomePage.css'; // Include custom CSS for further styling
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
@@ -24,36 +24,39 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    // Always update sortedPets when pets change, if required
     setSortedPets(pets);
   }, [pets]);
 
   const handleLike = (id) => {
-    // Trigger heart animation for the specific pet
     setHeartAnimation((prev) => ({ ...prev, [id]: true }));
     setTimeout(() => {
       setHeartAnimation((prev) => ({ ...prev, [id]: false }));
     }, 1000); // Heart disappears after 1 second
   };
 
-  // Sorting function for A-Z
   const sortAlphabetically = () => {
     const sorted = [...sortedPets].sort((a, b) => a.name.localeCompare(b.name));
-    setSortedPets(sorted); // Update the sortedPets state
-    console.log("Sorted Alphabetically:", sorted);
+    setSortedPets(sorted);
   };
 
-  // Sorting function for age
   const sortByAge = () => {
     const sorted = [...sortedPets].sort((a, b) => a.age - b.age);
-    setSortedPets(sorted); // Update the sortedPets state
-    console.log("Sorted by Age:", sorted);
+    setSortedPets(sorted);
   };
+
+  const chunkArray = (array, chunkSize) => {
+    const result = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+      result.push(array.slice(i, i + chunkSize));
+    }
+    return result;
+  };
+
+  // Divide pets into groups of 3 per slide
+  const petChunks = chunkArray(sortedPets, 3);
 
   return (
     <div>
-      {console.log('Rendered Pets:', sortedPets)} {/* Check if sortedPets is changing */}
-      {/* Include Navbar */}
       <NavbarComponent />
 
       {/* Filter Buttons */}
@@ -62,38 +65,42 @@ const HomePage = () => {
         <Button variant="outline-secondary" onClick={sortByAge}>Sort by Age</Button>
       </Container>
 
+      {/* Carousel to display pets as cards */}
       <Container className="my-4">
-        <Row>
-          {sortedPets.map((pet) => (
-            <Col key={pet._id} sm={12} md={4} className="mb-4">
-              <Card>
-                <Card.Img variant="top" src={`http://localhost:5000/${pet.image}`} />
-                <Card.Body>
-                  <Card.Title>{pet.name}</Card.Title>
-                  <Card.Text>Breed: {pet.breed}</Card.Text>
-                  <Card.Text>Age: {pet.age}</Card.Text>
-                  <div className="button-container">
-                    <button
-                      className="custom-button"
-                      onClick={() => handleLike(pet._id)}
-                    >
-                      <span className="button_top">Like</span>
-                    </button>
-                    <button className="custom-button" style={{ marginLeft: '10px' }}>
-                      <span className="button_top">Adopt</span>
-                    </button>
-                    {heartAnimation[pet._id] && (
-                      <div className="heart-animation"></div> /* Red heart animation */
-                    )}
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
+        <Carousel>
+          {petChunks.map((chunk, index) => (
+            <Carousel.Item key={index}>
+              <div className="d-flex justify-content-around">
+                {chunk.map((pet) => (
+                  <Card key={pet._id} style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={`http://localhost:5000/${pet.image}`} />
+                    <Card.Body>
+                      <Card.Title>{pet.name}</Card.Title>
+                      <Card.Text>Breed: {pet.breed}</Card.Text>
+                      <Card.Text>Age: {pet.age}</Card.Text>
+                      <div className="button-container">
+                        <button
+                          className="custom-button"
+                          onClick={() => handleLike(pet._id)}
+                        >
+                          <span className="button_top">Like</span>
+                        </button>
+                        <button className="custom-button" style={{ marginLeft: '10px' }}>
+                          <span className="button_top">Adopt</span>
+                        </button>
+                        {heartAnimation[pet._id] && (
+                          <div className="heart-animation"></div> /* Red heart animation */
+                        )}
+                      </div>
+                    </Card.Body>
+                  </Card>
+                ))}
+              </div>
+            </Carousel.Item>
           ))}
-        </Row>
+        </Carousel>
       </Container>
 
-      {/* Include Footer */}
       <FooterComponent />
     </div>
   );

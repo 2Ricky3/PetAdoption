@@ -39,7 +39,7 @@ const PublishPage = () => {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     setImage(file);
-    
+
     // Show image preview when file is uploaded
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -55,7 +55,7 @@ const PublishPage = () => {
       <NavbarComponent /> {/* Add Navbar */}
       <StyledWrapper>
         <form className="form" onSubmit={handlePublish}>
-          <h2>Publish a Pet</h2>
+          <h2 className="form-title">Publish a Pet</h2>
           <div className="flex-column">
             <label>Pet Name</label>
             <input
@@ -109,6 +109,7 @@ const PublishPage = () => {
             )}
           </div>
           <button type="submit" className="button-submit">Publish</button>
+          <p className="small-text">Ts & Cs Apply. Based in South Africa.</p>
         </form>
       </StyledWrapper>
     </div>
@@ -120,34 +121,45 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin-top: -80px;
+  width: 100%;
+  background-color: #2c2c2c; 
+  position: relative;
+
+  /* Background */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+  }
 
   .form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px; /* Increased gap for more space between elements */
     background-color: #ffffff;
-    padding: 30px;
-    width: 450px;
+    padding: 40px;
+    width: 500px; /* Increased width for more room */
     border-radius: 20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1;
   }
 
-  h2 {
+  .form-title {
     text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
     color: #151717;
   }
 
   .flex-column {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
-  }
-
-  label {
-    color: #151717;
-    font-weight: 600;
   }
 
   .input {
@@ -155,13 +167,13 @@ const StyledWrapper = styled.div`
     border-radius: 10px;
     height: 50px;
     padding-left: 10px;
-    transition: 0.2s ease-in-out;
-    font-size: 16px;
+    transition: all 0.3s ease-in-out; 
   }
 
-  .input:focus {
-    border: 1.5px solid #2d79f3;
-    outline: none;
+  .input:focus-within {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px); 
   }
 
   .upload-icon {
@@ -181,14 +193,7 @@ const StyledWrapper = styled.div`
   }
 
   .input-file {
-    display: none; /* Hide the actual file input */
-  }
-
-  .custom-file-upload {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 16px;
+    display: none;
   }
 
   .button-submit {
@@ -202,10 +207,16 @@ const StyledWrapper = styled.div`
     height: 50px;
     width: 100%;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0);
   }
 
   .button-submit:hover {
-    background-color: #252727;
+    background-color: #808080;
+    box-shadow: 0 0 10px rgba(128, 128, 128, 0.7),
+                0 0 15px rgba(128, 128, 128, 0.5),
+                0 0 20px rgba(128, 128, 128, 0.4);
+    color: white;
   }
 
   .image-preview {
@@ -218,6 +229,13 @@ const StyledWrapper = styled.div`
     height: 100px;
     border-radius: 10px;
     object-fit: cover;
+  }
+
+  .small-text {
+    text-align: center;
+    font-size: 12px;
+    color: grey;
+    margin-top: 5px;
   }
 `;
 

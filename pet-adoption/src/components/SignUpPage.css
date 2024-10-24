@@ -1,10 +1,9 @@
-/* Apply background image to the body */
+/* Apply smokey grey background to the body */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: url('../assets/background.jpg') no-repeat center center fixed;
-    background-size: cover;
+    background-color: #2c2c2c; /* Smokey grey background */
     position: relative;
   }
   
@@ -15,8 +14,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.55); /* White overlay to create opacity */
-    z-index: -1; /* Push the overlay to the back */
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker overlay for effect */
+    z-index: -1;
   }
   
   /* Adjust the container for opacity and structure */
@@ -50,4 +49,21 @@ body {
     width: 200px;
     margin-bottom: 2rem;
   }
+
+  /* Form adjustments for publish page */
+  .publish-container {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  }
   
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .btn {
+    width: 100%;
+  }

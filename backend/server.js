@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes'); // Import user routes
 const petRoutes = require('./routes/petRoutes'); // Import pet routes
+const adminRoutes = require('./routes/adminRoutes'); // Import pet routes
 
 
 const app = express();
