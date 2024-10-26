@@ -31,7 +31,7 @@ router.post('/publish', upload.single('image'), async (req, res) => {
       name: req.body.name,
       age: req.body.age,
       breed: req.body.breed,
-      image: req.file.path // Save the image path
+      image:  `uploads/${req.file.filename}` // Save the relative path
     });
     await newPet.save();
     res.status(201).json(newPet);

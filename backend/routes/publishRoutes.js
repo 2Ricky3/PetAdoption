@@ -25,7 +25,7 @@ router.post('/publish', upload.single('image'), async (req, res) => {
       name,
       age,
       breed,
-      image: `/assets/uploads/${req.file.filename}` // Save the image path in the database
+      image: `/uploads/${req.file.filename}` // Save the image path in the database
     });
     
     await pet.save();

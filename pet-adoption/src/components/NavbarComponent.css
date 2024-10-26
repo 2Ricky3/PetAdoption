@@ -1,11 +1,35 @@
+.custom-navbar {
+  background-color: rgba(44, 44, 44, 0.8); /* Smoky glass effect */
+  backdrop-filter: blur(10px); 
+  border-radius: 12px;
+  padding: 0.5rem 2rem;
+  margin: 1rem;
+}
+
 .navbar-brand-custom {
-    display: flex;
-    align-items: center;
-  }
-  
-  .brand-text {
-    margin-left: 10px; /* Adds space between the logo and the text */
-    font-size: 1.5rem; /* Adjust font size */
-    vertical-align: middle;
-  }
-  
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  width: 70px; /* Adjust as needed */
+  height: 70px; /* Adjust as needed */
+}
+
+.brand-text {
+  font-size: 2rem; /* Larger font size for brand text */
+  color: white;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.ml-auto .nav-link {
+  color: white !important;
+  font-size: 1.1rem;
+  margin-left: 1rem;
+}
+
+button {
+  font-size: 1rem;
+  padding: 0.4rem 1rem;
+}

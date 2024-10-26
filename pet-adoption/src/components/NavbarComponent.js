@@ -2,31 +2,28 @@ import React from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import './NavbarComponent.css'; // Ensure this CSS file contains the navbar styles
 
 const NavbarComponent = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Clear authentication token or session data
     localStorage.removeItem('authToken');
-    
     alert('Logging out...');
-
-    // Redirect to login page
     navigate('/login');
   };
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar className="custom-navbar">
       <Navbar.Brand href="/home" className="navbar-brand-custom">
         <img
           src={logo}
-          width="50"
-          height="50"
-          className="d-inline-block align-top"
+          width="70"   // Increase width
+          height="70"  // Increase height
+          className="d-inline-block align-top logo-image"
           alt="Logo"
         />
-        <span className="brand-text"> Pen Pets</span>
+        <span className="brand-text">Pen Pets</span>
       </Navbar.Brand>
       <Nav className="ml-auto">
         <Nav.Link href="/publish">Publish</Nav.Link>

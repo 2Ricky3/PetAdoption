@@ -9,8 +9,10 @@ import AdminPage from './components/AdminPage';
 import AdminLogin from './components/AdminLogin';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 function App() {
   return (
+    <div style={{ backgroundColor: '#2c2c2c', minHeight: '100vh' }}> {/* Page background */}
     <Router>
       <Routes>
         {/* Default route to login page */}
@@ -21,10 +23,11 @@ function App() {
         <Route path="/centres" element={<CentresPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/admin" element={<AdminPage />} />
-        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/signup" element={<SignUpPage />} /> {/* Ensure SignUpPage works */}
       </Routes>
     </Router>
+    </div>
   );
 }
 

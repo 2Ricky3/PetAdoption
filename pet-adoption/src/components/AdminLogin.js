@@ -19,7 +19,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div>
+    <div style={{ color: 'black', backgroundColor: 'white', padding: '20px' }}>
       <h2>Admin Login</h2>
       <form onSubmit={handleLogin}>
         <div>
@@ -35,6 +35,8 @@ const AdminLogin = () => {
       </form>
     </div>
   );
+  
 };
+console.log("AdminLogin component rendered");
 
 export default AdminLogin;

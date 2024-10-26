@@ -4,6 +4,8 @@ const cors = require('cors');
 const userRoutes = require('./routes/userRoutes'); // Import user routes
 const petRoutes = require('./routes/petRoutes'); // Import pet routes
 const adminRoutes = require('./routes/adminRoutes'); // Import pet routes
+const path = require('path');
+
 
 
 const app = express();
@@ -21,7 +23,8 @@ mongoose.connect('mongodb+srv://admin:2003@cluster0.nwsv0.mongodb.net/petAdoptio
 // Routes
 app.use('/api/users', userRoutes); // User routes
 app.use('/api/pets', petRoutes); // This should match the API call in the frontend
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/api/admin', adminRoutes);
 
 
 const PORT = process.env.PORT || 5000;

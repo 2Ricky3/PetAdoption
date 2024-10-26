@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Carousel, Card, Button, Container } from 'react-bootstrap';
+import { Carousel, Card, Button, Container, Row, Col } from 'react-bootstrap';
 import NavbarComponent from './NavbarComponent';
 import FooterComponent from './FooterComponent';
-import './HomePage.css'; // Include custom CSS for further styling
+import './HomePage.css';
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
   const [heartAnimation, setHeartAnimation] = useState({});
-  const [sortedPets, setSortedPets] = useState([]); // To store sorted pets
 
   useEffect(() => {
     const fetchPets = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/pets');
         setPets(response.data);
-        setSortedPets(response.data); // Initialize sortedPets
       } catch (error) {
         console.error('Error fetching pets:', error);
       }
@@ -23,82 +21,113 @@ const HomePage = () => {
     fetchPets();
   }, []);
 
-  useEffect(() => {
-    setSortedPets(pets);
-  }, [pets]);
-
   const handleLike = (id) => {
     setHeartAnimation((prev) => ({ ...prev, [id]: true }));
     setTimeout(() => {
       setHeartAnimation((prev) => ({ ...prev, [id]: false }));
-    }, 1000); // Heart disappears after 1 second
+    }, 1000);
   };
-
-  const sortAlphabetically = () => {
-    const sorted = [...sortedPets].sort((a, b) => a.name.localeCompare(b.name));
-    setSortedPets(sorted);
-  };
-
-  const sortByAge = () => {
-    const sorted = [...sortedPets].sort((a, b) => a.age - b.age);
-    setSortedPets(sorted);
-  };
-
-  const chunkArray = (array, chunkSize) => {
-    const result = [];
-    for (let i = 0; i < array.length; i += chunkSize) {
-      result.push(array.slice(i, i + chunkSize));
-    }
-    return result;
-  };
-
-  // Divide pets into groups of 3 per slide
-  const petChunks = chunkArray(sortedPets, 3);
 
   return (
     <div>
       <NavbarComponent />
 
-      {/* Filter Buttons */}
-      <Container className="text-center my-3">
-        <Button variant="outline-secondary" onClick={sortAlphabetically}>Sort A-Z</Button>{' '}
-        <Button variant="outline-secondary" onClick={sortByAge}>Sort by Age</Button>
+      {/* Welcome Section */}
+      <Container className="text-center my-4">
+        <h1 className="welcome-text">Welcome to Pen Pets</h1>
+        <p className="subtext">Your friendly pet adoption application where you can freely browse, like, and adopt pets looking for a loving home.</p>
       </Container>
 
-      {/* Carousel to display pets as cards */}
+      {/* Mission and Vision Cards */}
+      <Container className="my-5">
+        <Row>
+          <Col md={6} className="mb-4">
+            <Card className="h-100 mission-vision-card">
+              <Card.Body>
+                <Card.Title className="text-center">Our Mission</Card.Title>
+                <Card.Text>
+                  Our mission is to connect loving families with animals in need of a home, creating a positive impact in both their lives and our communities.
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={6} className="mb-4">
+            <Card className="h-100 mission-vision-card">
+              <Card.Body>
+                <Card.Title className="text-center">Our Vision</Card.Title>
+                <Card.Text>
+                  We envision a world where every pet finds a safe, loving, and caring family. Join us in making this vision a reality, one adoption at a time.
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+
+      {/* Pet Carousel */}
       <Container className="my-4">
-        <Carousel>
-          {petChunks.map((chunk, index) => (
+        <Carousel indicators={false} interval={3000} className="pet-carousel">
+          {pets.map((pet, index) => (
             <Carousel.Item key={index}>
-              <div className="d-flex justify-content-around">
-                {chunk.map((pet) => (
-                  <Card key={pet._id} style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={`http://localhost:5000/${pet.image}`} />
-                    <Card.Body>
-                      <Card.Title>{pet.name}</Card.Title>
-                      <Card.Text>Breed: {pet.breed}</Card.Text>
-                      <Card.Text>Age: {pet.age}</Card.Text>
-                      <div className="button-container">
-                        <button
-                          className="custom-button"
-                          onClick={() => handleLike(pet._id)}
-                        >
-                          <span className="button_top">Like</span>
-                        </button>
-                        <button className="custom-button" style={{ marginLeft: '10px' }}>
-                          <span className="button_top">Adopt</span>
-                        </button>
-                        {heartAnimation[pet._id] && (
-                          <div className="heart-animation"></div> /* Red heart animation */
-                        )}
-                      </div>
-                    </Card.Body>
-                  </Card>
-                ))}
+              <div className="d-flex justify-content-center">
+                <Card style={{ width: '18rem' }} className="pet-card">
+                  <Card.Img variant="top" src={`http://localhost:5000/${pet.image}`} className="card-image" />
+                  <Card.Body>
+                    <Card.Title>{pet.name}</Card.Title>
+                    <Card.Text>Breed: {pet.breed}</Card.Text>
+                    <Card.Text>Age: {pet.age}</Card.Text>
+                    <Button className="btn-custom" onClick={() => handleLike(pet._id)}>Like</Button>{' '}
+                    <Button className="btn-custom">Adopt</Button>
+                    {heartAnimation[pet._id] && <div className="heart-animation"></div>}
+                  </Card.Body>
+                </Card>
               </div>
             </Carousel.Item>
           ))}
         </Carousel>
+      </Container>
+
+      {/* Team Section */}
+      <Container className="text-center my-5">
+        <h2 className="welcome-text">Meet Our Team</h2>
+        <Row>
+          <Col md={4} className="mb-4">
+            <Card className="team-card h-100">
+              <Card.Img variant="top" src="https://via.placeholder.com/150" className="team-image" />
+              <Card.Body>
+                <Card.Title>Alex Johnson</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Founder & CEO</Card.Subtitle>
+                <Card.Text>
+                  Alex is passionate about connecting pets with loving homes and founded Pen Pets to make a difference.
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={4} className="mb-4">
+            <Card className="team-card h-100">
+              <Card.Img variant="top" src="https://via.placeholder.com/150" className="team-image" />
+              <Card.Body>
+                <Card.Title>Sara Martinez</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Head of Marketing</Card.Subtitle>
+                <Card.Text>
+                  Sara ensures our mission reaches as many people as possible, connecting pets with potential families.
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={4} className="mb-4">
+            <Card className="team-card h-100">
+              <Card.Img variant="top" src="https://via.placeholder.com/150" className="team-image" />
+              <Card.Body>
+                <Card.Title>Tom Green</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Operations Manager</Card.Subtitle>
+                <Card.Text>
+                  Tom oversees operations to ensure that everything runs smoothly and our pets are well taken care of.
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
       </Container>
 
       <FooterComponent />

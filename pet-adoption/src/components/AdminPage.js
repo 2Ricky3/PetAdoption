@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import NavbarComponent from './NavbarComponent';
 
 const AdminPage = () => {
   const [users, setUsers] = useState([]);
   const [pets, setPets] = useState([]);
-  const [password] = useState('2003'); // Hardcode the password
+  const [password] = useState('2003');
+  const navigate = useNavigate();
 
-  
   useEffect(() => {
+    // Check if the admin is logged in
+    if (localStorage.getItem('isAdmin') !== 'true') {
+      navigate('/adminlogin'); // Redirect to login page if not logged in as admin
+      return;
+    }
+
     const fetchData = async () => {
       try {
         const usersResponse = await axios.get(`http://localhost:5000/api/admin/users?password=${password}`);
@@ -21,7 +28,7 @@ const AdminPage = () => {
       }
     };
     fetchData();
-  }, [password]);
+  }, [password, navigate]);
 
   const handleDeleteUser = async (id) => {
     try {
