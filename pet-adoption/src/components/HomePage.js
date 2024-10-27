@@ -3,17 +3,20 @@ import axios from 'axios';
 import { Carousel, Card, Button, Container, Row, Col } from 'react-bootstrap';
 import NavbarComponent from './NavbarComponent';
 import FooterComponent from './FooterComponent';
+import logo from '../assets/logo.png'; // Import the logo for background
 import './HomePage.css';
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
   const [heartAnimation, setHeartAnimation] = useState({});
+  const [sortedPets, setSortedPets] = useState([]);
 
   useEffect(() => {
     const fetchPets = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/pets');
         setPets(response.data);
+        setSortedPets(response.data);
       } catch (error) {
         console.error('Error fetching pets:', error);
       }
@@ -28,12 +31,23 @@ const HomePage = () => {
     }, 1000);
   };
 
+  const sortAlphabetically = () => {
+    const sorted = [...sortedPets].sort((a, b) => a.name.localeCompare(b.name));
+    setSortedPets(sorted);
+  };
+
+  const sortByAge = () => {
+    const sorted = [...sortedPets].sort((a, b) => a.age - b.age);
+    setSortedPets(sorted);
+  };
+
   return (
     <div>
       <NavbarComponent />
 
       {/* Welcome Section */}
-      <Container className="text-center my-4">
+      <Container className="text-center my-4 welcome-section">
+        <img src={logo} alt="Logo" className="background-logo" />
         <h1 className="welcome-text">Welcome to Pen Pets</h1>
         <p className="subtext">Your friendly pet adoption application where you can freely browse, like, and adopt pets looking for a loving home.</p>
       </Container>
@@ -64,36 +78,52 @@ const HomePage = () => {
         </Row>
       </Container>
 
-      {/* Pet Carousel */}
-      <Container className="my-4">
-        <Carousel indicators={false} interval={3000} className="pet-carousel">
-          {pets.map((pet, index) => (
-            <Carousel.Item key={index}>
-              <div className="d-flex justify-content-center">
-                <Card style={{ width: '18rem' }} className="pet-card">
-                  <Card.Img variant="top" src={`http://localhost:5000/${pet.image}`} className="card-image" />
-                  <Card.Body>
-                    <Card.Title>{pet.name}</Card.Title>
-                    <Card.Text>Breed: {pet.breed}</Card.Text>
-                    <Card.Text>Age: {pet.age}</Card.Text>
-                    <Button className="btn-custom" onClick={() => handleLike(pet._id)}>Like</Button>{' '}
-                    <Button className="btn-custom">Adopt</Button>
-                    {heartAnimation[pet._id] && <div className="heart-animation"></div>}
-                  </Card.Body>
-                </Card>
-              </div>
-            </Carousel.Item>
-          ))}
-        </Carousel>
+      {/* Filter Buttons */}
+      <Container className="text-center my-4">
+        <Button className="filter-btn" onClick={sortAlphabetically}>Sort A-Z</Button>
+        <Button className="filter-btn" onClick={sortByAge}>Sort by Age</Button>
       </Container>
 
+     {/* Pet Carousel with 5 pets per slide */}
+{/* Pet Carousel with 4 pets per slide */}
+<Container className="my-4">
+  <Carousel indicators={true} interval={3000} className="pet-carousel" controls={false} wrap={true}>
+    {Array.from({ length: Math.ceil(sortedPets.length / 4) }).map((_, pageIndex) => (
+      <Carousel.Item key={pageIndex}>
+        <Row className="justify-content-center">
+          {sortedPets.slice(pageIndex * 4, pageIndex * 4 + 4).map((pet) => (
+            <Col key={pet._id} md={3} className="mb-4"> {/* Adjust column width to fit 4 items */}
+              <Card className="pet-card">
+                <Card.Img variant="top" src={`http://localhost:5000/${pet.image}`} className="card-image" />
+                <Card.Body className="text-center">
+                  <Card.Title>{pet.name}</Card.Title>
+                  <Card.Text>Breed: {pet.breed}</Card.Text>
+                  <Card.Text>Age: {pet.age}</Card.Text>
+                  <div className="d-flex justify-content-around">
+                    <Button className="btn-custom" onClick={() => handleLike(pet._id)}>Like</Button>
+                    <Button className="btn-custom">Adopt</Button>
+                  </div>
+                  {heartAnimation[pet._id] && <div className="heart-animation"></div>}
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Carousel.Item>
+    ))}
+  </Carousel>
+</Container>
+
+
+  
+
       {/* Team Section */}
-      <Container className="text-center my-5">
+      <Container className="text-center my-5 team-section">
         <h2 className="welcome-text">Meet Our Team</h2>
         <Row>
           <Col md={4} className="mb-4">
             <Card className="team-card h-100">
-              <Card.Img variant="top" src="https://via.placeholder.com/150" className="team-image" />
+              <Card.Img variant="top" src={require('../assets/AlexJohnson.jpg')} className="team-image" />
               <Card.Body>
                 <Card.Title>Alex Johnson</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">Founder & CEO</Card.Subtitle>
@@ -105,7 +135,7 @@ const HomePage = () => {
           </Col>
           <Col md={4} className="mb-4">
             <Card className="team-card h-100">
-              <Card.Img variant="top" src="https://via.placeholder.com/150" className="team-image" />
+              <Card.Img variant="top" src={require('../assets/SaraMartinez.jpg')} className="team-image" />
               <Card.Body>
                 <Card.Title>Sara Martinez</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">Head of Marketing</Card.Subtitle>
@@ -117,7 +147,7 @@ const HomePage = () => {
           </Col>
           <Col md={4} className="mb-4">
             <Card className="team-card h-100">
-              <Card.Img variant="top" src="https://via.placeholder.com/150" className="team-image" />
+              <Card.Img variant="top" src={require('../assets/TomGreen.jpg')} className="team-image" />
               <Card.Body>
                 <Card.Title>Tom Green</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">Operations Manager</Card.Subtitle>

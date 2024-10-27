@@ -1,45 +1,52 @@
 /* General Styling */
-.welcome-text {
+/* Background Logo Styling */
+.welcome-section {
+  position: relative;
+  z-index: 1;
+  padding-top: 60px; /* Adds space for the logo */
+}
+
+.background-logo {
+  position: absolute;
+  top: -30px; /* Move the logo above the welcome text */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.2; /* Lightens the logo so it doesn’t overwhelm the text */
+  width: 100px; /* Adjusts the size as needed */
+  z-index: -1; /* Ensures the logo stays behind the text */
+}
+
+/* Welcome Text and Subtext */
+.welcome-text, .subtext {
   color: white;
-  font-size: 2.5rem;
   font-weight: bold;
-  text-align: center;
-  margin-top: 20px;
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3); /* Subtle glow */
 }
 
-.subtext {
-  color: white;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 30px;
+.welcome-text:hover, .subtext:hover {
+  color: #ffffff; /* Keeps text white on hover */
+  text-shadow: 0px 0px 12px #ffffff, 0px 0px 24px #ffffff; /* Neon glow effect */
+  transition: text-shadow 0.3s ease;
 }
 
-/* Mission and Vision Card Styling */
+/* Mission and Vision Card Hover Effect */
 .mission-vision-card {
-  border-radius: 15px;
-  background-color: #f8f9fa;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: #333;
 }
 
 .mission-vision-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+  transform: scale(1.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Pet Card Styling */
 .pet-card {
+  width: 15rem; /* Adjusts width to a narrower size */
   border-radius: 10px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  margin: auto; /* Centers card within the carousel */
 }
 
 .pet-card:hover {
@@ -52,6 +59,7 @@
   object-fit: cover;
   border-radius: 10px 10px 0 0;
 }
+
 
 /* Like and Adopt Button Styling */
 .btn-custom {
@@ -68,19 +76,25 @@
 }
 
 /* Filter Button Styling */
+/* Filter Button Styling */
+/* Filter Button Styling */
 .filter-btn {
-  background-color: white !important;
-  color: rgb(43, 43, 43) !important;
+  background-color: white !important; /* Force white background */
+  color: rgb(43, 43, 43) !important; /* Dark text color */
   border: 1px solid grey !important;
   padding: 0.5em 1em;
   margin: 0 0.5em;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  font-weight: bold;
+  box-shadow: none;
 }
 
 .filter-btn:hover {
   background-color: grey !important;
   color: white !important;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8), 0px 0px 20px rgba(255, 255, 255, 0.6); /* Neon glow effect */
 }
+
 
 /* Heart Animation */
 .heart-animation {
@@ -111,27 +125,39 @@
 }
 
 /* Carousel Pagination Styling */
+/* Enhanced Carousel Indicator Styling */
 .pet-carousel .carousel-indicators {
   position: static;
-  margin-top: 10px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 }
 
 .pet-carousel .carousel-indicators li {
-  background-color: white !important;
-  width: 12px;
-  height: 12px;
+  background-color: rgba(255, 255, 255, 0.7); /* Slightly translucent white */
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
+  transition: background-color 0.3s, transform 0.3s ease; /* Smooth transition */
+  margin: 0 5px; /* Space between indicators */
 }
 
 .pet-carousel .carousel-indicators .active {
-  background-color: grey !important;
+  background-color: white;
+  border: 2px solid #333; /* Add border for better visibility */
+  transform: scale(1.2); /* Slightly larger when active */
 }
+
+.team-section {
+  margin-top: 60px; /* Increased top margin for spacing above team section */
+  margin-bottom: 60px; /* Increased bottom margin for spacing below team section */
+}
+
 .team-card {
   border-radius: 10px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  padding: 20px; /* Added padding inside team cards */
 }
 
 .team-card:hover {
@@ -142,9 +168,10 @@
 .team-image {
   height: 150px;
   width: 150px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 50%;
   margin: 20px auto;
+  background-color: #f0f0f0;
 }
 
 .team-card .card-title {

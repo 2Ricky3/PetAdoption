@@ -1,4 +1,65 @@
-.card-img-top {
-    border-radius: 20px;
-  }
-  
+/* General Page Styling */
+.centres-page {
+  background-color: #2c2c2c;
+  min-height: 100vh;
+  color: white;
+}
+
+/* Header Text Styling */
+.centres-header {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3);
+  transition: text-shadow 0.3s ease;
+}
+
+.centres-header:hover {
+  color: #ffffff;
+  text-shadow: 0px 0px 12px #ffffff, 0px 0px 24px #ffffff;
+  transition: text-shadow 0.3s ease;
+}
+
+/* Subtext Styling */
+.centres-subtext {
+  color: lightgrey;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.2);
+  transition: text-shadow 0.3s ease;
+}
+
+.centres-subtext:hover {
+  color: #ffffff;
+  text-shadow: 0px 0px 10px #ffffff, 0px 0px 20px #ffffff;
+  transition: text-shadow 0.3s ease;
+}
+
+/* Centre Card Styling */
+.centre-card {
+  background-color: #444;
+  border-radius: 15px;
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.centre-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.4);
+}
+
+.centre-card-img {
+  border-radius: 15px 15px 0 0;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Distance Button Styling */
+.centre-card .btn-secondary {
+  background-color: #666;
+  border: none;
+  margin-top: 15px;
+  font-weight: bold;
+}
