@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Carousel, Card, Button, Container, Row, Col } from 'react-bootstrap';
 import NavbarComponent from './NavbarComponent';
 import FooterComponent from './FooterComponent';
-import logo from '../assets/logo.png'; // Import the logo for background
+import logo from '../assets/logo.png';
 import './HomePage.css';
 
 const HomePage = () => {
@@ -46,16 +46,18 @@ const HomePage = () => {
       <NavbarComponent />
 
       {/* Welcome Section */}
-      <Container className="text-center my-4 welcome-section">
+      <Container className="text-center my-5 welcome-section">
         <img src={logo} alt="Logo" className="background-logo" />
         <h1 className="welcome-text">Welcome to Pen Pets</h1>
-        <p className="subtext">Your friendly pet adoption application where you can freely browse, like, and adopt pets looking for a loving home.</p>
+        <p className="subtext">
+          Your friendly pet adoption application where you can freely browse, like, and adopt pets looking for a loving home.
+        </p>
       </Container>
 
       {/* Mission and Vision Cards */}
-      <Container className="my-5">
-        <Row>
-          <Col md={6} className="mb-4">
+      <Container className="my-5 pb-5">
+        <Row className="gy-4">
+          <Col md={6}>
             <Card className="h-100 mission-vision-card">
               <Card.Body>
                 <Card.Title className="text-center">Our Mission</Card.Title>
@@ -65,7 +67,7 @@ const HomePage = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={6} className="mb-4">
+          <Col md={6}>
             <Card className="h-100 mission-vision-card">
               <Card.Body>
                 <Card.Title className="text-center">Our Vision</Card.Title>
@@ -79,51 +81,47 @@ const HomePage = () => {
       </Container>
 
       {/* Filter Buttons */}
-      <Container className="text-center my-4">
-        <Button className="filter-btn" onClick={sortAlphabetically}>Sort A-Z</Button>
-        <Button className="filter-btn" onClick={sortByAge}>Sort by Age</Button>
+      <Container className="text-center my-5">
+        <Button className="filter-btn mx-2" onClick={sortAlphabetically}>Sort A-Z</Button>
+        <Button className="filter-btn mx-2" onClick={sortByAge}>Sort by Age</Button>
       </Container>
 
-     {/* Pet Carousel with 5 pets per slide */}
-{/* Pet Carousel with 4 pets per slide */}
-<Container className="my-4">
-  <Carousel indicators={true} interval={3000} className="pet-carousel" controls={false} wrap={true}>
-    {Array.from({ length: Math.ceil(sortedPets.length / 4) }).map((_, pageIndex) => (
-      <Carousel.Item key={pageIndex}>
-        <Row className="justify-content-center">
-          {sortedPets.slice(pageIndex * 4, pageIndex * 4 + 4).map((pet) => (
-            <Col key={pet._id} md={3} className="mb-4"> {/* Adjust column width to fit 4 items */}
-              <Card className="pet-card">
-                <Card.Img variant="top" src={`http://localhost:5000/${pet.image}`} className="card-image" />
-                <Card.Body className="text-center">
-                  <Card.Title>{pet.name}</Card.Title>
-                  <Card.Text>Breed: {pet.breed}</Card.Text>
-                  <Card.Text>Age: {pet.age}</Card.Text>
-                  <div className="d-flex justify-content-around">
-                    <Button className="btn-custom" onClick={() => handleLike(pet._id)}>Like</Button>
-                    <Button className="btn-custom">Adopt</Button>
-                  </div>
-                  {heartAnimation[pet._id] && <div className="heart-animation"></div>}
-                </Card.Body>
-              </Card>
-            </Col>
+      {/* Pet Carousel with 4 pets per slide */}
+      <Container className="my-5 pb-5">
+        <Carousel indicators={true} interval={3000} className="pet-carousel" controls={false} wrap={true}>
+          {Array.from({ length: Math.ceil(sortedPets.length / 4) }).map((_, pageIndex) => (
+            <Carousel.Item key={pageIndex}>
+              <Row className="justify-content-center">
+                {sortedPets.slice(pageIndex * 4, pageIndex * 4 + 4).map((pet) => (
+                  <Col key={pet._id} md={3} className="mb-4">
+                    <Card className="pet-card">
+                      <Card.Img variant="top" src={`http://localhost:5000/${pet.image}`} className="card-image" />
+                      <Card.Body className="text-center">
+                        <Card.Title>{pet.name}</Card.Title>
+                        <Card.Text>Breed: {pet.breed}</Card.Text>
+                        <Card.Text>Age: {pet.age}</Card.Text>
+                        <div className="d-flex justify-content-around">
+                          <Button className="btn-custom" onClick={() => handleLike(pet._id)}>Like</Button>
+                          <Button className="btn-custom">Adopt</Button>
+                        </div>
+                        {heartAnimation[pet._id] && <div className="heart-animation"></div>}
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </Carousel.Item>
           ))}
-        </Row>
-      </Carousel.Item>
-    ))}
-  </Carousel>
-</Container>
-
-
-  
+        </Carousel>
+      </Container>
 
       {/* Team Section */}
-      <Container className="text-center my-5 team-section">
-        <h2 className="welcome-text">Meet Our Team</h2>
-        <Row>
-          <Col md={4} className="mb-4">
+      <Container className="text-center my-5 pt-5 team-section">
+        <h2 className="welcome-text mb-5">Meet Our Team</h2>
+        <Row className="gy-4">
+          <Col md={4}>
             <Card className="team-card h-100">
-              <Card.Img variant="top" src={require('../assets/AlexJohnson.jpg')} className="team-image" />
+              <Card.Img variant="top" src={require('../assets/SaraMartinez.jpg')} className="team-image" />
               <Card.Body>
                 <Card.Title>Alex Johnson</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">Founder & CEO</Card.Subtitle>
@@ -133,9 +131,9 @@ const HomePage = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4} className="mb-4">
+          <Col md={4}>
             <Card className="team-card h-100">
-              <Card.Img variant="top" src={require('../assets/SaraMartinez.jpg')} className="team-image" />
+              <Card.Img variant="top" src={require('../assets/AlexJohnson.jpg')} className="team-image" />
               <Card.Body>
                 <Card.Title>Sara Martinez</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">Head of Marketing</Card.Subtitle>
@@ -145,7 +143,7 @@ const HomePage = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4} className="mb-4">
+          <Col md={4}>
             <Card className="team-card h-100">
               <Card.Img variant="top" src={require('../assets/TomGreen.jpg')} className="team-image" />
               <Card.Body>
