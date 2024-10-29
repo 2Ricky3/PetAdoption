@@ -1,6 +1,6 @@
 .custom-navbar {
-  background-color: rgba(44, 44, 44, 0.8); /* Smoky glass effect */
-  backdrop-filter: blur(10px); 
+  background-color: rgba(44, 44, 44, 0.8);
+  backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 0.5rem 2rem;
   margin: 1rem;
@@ -12,12 +12,12 @@
 }
 
 .logo-image {
-  width: 70px; /* Adjust as needed */
-  height: 70px; /* Adjust as needed */
+  width: 70px;
+  height: 70px;
 }
 
 .brand-text {
-  font-size: 2rem; /* Larger font size for brand text */
+  font-size: 2rem;
   color: white;
   margin-left: 10px;
   font-weight: bold;
@@ -26,7 +26,34 @@
 .ml-auto .nav-link {
   color: white !important;
   font-size: 1.1rem;
-  margin-left: 1rem;
+  margin: 0 1.5rem; /* Increased padding between links */
+  position: relative;
+  transition: color 0.3s ease; /* Smooth transition for text color */
+}
+
+.ml-auto .nav-link::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width 0.3s ease; /* Smooth underline effect */
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+
+.ml-auto .nav-link:hover::after {
+  width: 100%; /* Expand underline on hover */
+}
+
+.active-link {
+  color: white !important;
+  font-weight: bold;
+}
+
+.active-link::after {
+  width: 100%; /* Keeps underline for active link */
 }
 
 button {

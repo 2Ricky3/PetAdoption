@@ -1,4 +1,4 @@
-/* General Styling */
+
 /* Background Logo Styling */
 .welcome-section {
   position: relative;
@@ -41,23 +41,68 @@
 }
 
 /* Pet Card Styling */
+/* Enhanced Pet Card Styling */
+/* Pet Card Styling within Carousel */
 .pet-card {
-  width: 15rem; /* Adjusts width to a narrower size */
-  border-radius: 10px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  margin: auto; /* Centers card within the carousel */
+  width: 14rem; /* Slightly smaller width to fit carousel */
+  border-radius: 15px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+  margin: 15px auto; /* Extra margin between cards */
+  overflow: hidden;
+  background-color: #2a2a2a;
+  color: #ffffff;
+  padding-bottom: 10px;
 }
 
 .pet-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px) scale(1.03); /* Slightly larger hover scale */
+  box-shadow: 0px 6px 25px rgba(255, 255, 255, 0.25);
 }
 
+
+/* Card Image Styling */
+/* Card Image Styling */
 .card-image {
-  height: 200px;
+  height: 180px;
   width: 100%;
   object-fit: cover;
-  border-radius: 10px 10px 0 0;
+  border-radius: 15px 15px 0 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.pet-card:hover .card-image {
+  transform: scale(1.05); /* Subtle zoom on hover */
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3); /* Light shadow on hover */
+}
+
+/* Centered and Enhanced Text */
+.pet-card .card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #4d4d4d;
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.3); /* Subtle glow */
+}
+
+.pet-card .card-text {
+  color: #505050; /* Softer color for text details */
+  margin: 5px 0;
+}
+
+/* Button Styling within Cards */
+.pet-card .btn-custom {
+  background-color: #4b4b4b !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 7px;
+  width: 80px;
+  padding: 0.4em 0;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.pet-card .btn-custom:hover {
+  background-color: #333333 !important; /* Darker shade on hover */
+  transform: translateY(-3px); /* Slight lift on hover */
 }
 
 
@@ -75,8 +120,6 @@
   color: white !important;
 }
 
-/* Filter Button Styling */
-/* Filter Button Styling */
 /* Filter Button Styling */
 .filter-btn {
   background-color: white !important; /* Force white background */
@@ -124,28 +167,60 @@
   }
 }
 
-/* Carousel Pagination Styling */
+/* Carousel */
+
 /* Enhanced Carousel Indicator Styling */
+/* Ball-style Carousel Indicator Styling */
+/* Refined Carousel Indicator Styling */
 .pet-carousel .carousel-indicators {
   position: static;
   margin-top: 20px;
   display: flex;
   justify-content: center;
+  gap: 10px; /* Space between indicators for better separation */
 }
 
 .pet-carousel .carousel-indicators li {
-  background-color: rgba(255, 255, 255, 0.7); /* Slightly translucent white */
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  transition: background-color 0.3s, transform 0.3s ease; /* Smooth transition */
-  margin: 0 5px; /* Space between indicators */
+  background-color: rgba(255, 255, 255, 0.5); /* Light, semi-transparent color */
+  width: 12px;
+  height: 12px;
+  border-radius: 50%; /* Circular shape */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.pet-carousel .carousel-indicators li:hover {
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly brighter on hover */
 }
 
 .pet-carousel .carousel-indicators .active {
-  background-color: white;
-  border: 2px solid #333; /* Add border for better visibility */
-  transform: scale(1.2); /* Slightly larger when active */
+  background-color: #ffffff; /* Solid color for the active indicator */
+  width: 14px;
+  height: 14px; /* Slightly larger size for active indicator */
+  transform: scale(1.2); /* Enlarged appearance for the active indicator */
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6); /* Subtle glow effect */
+}
+
+
+/* Carousel Container Styling */
+.pet-carousel {
+  background-color: #2a2a2a; /* Match carousel background with card color for a seamless look */
+  border-radius: 15px; /* Rounded corners for a softer look */
+  padding: 30px; /* Adds padding to create space around cards */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+}
+
+/* Carousel Item Adjustments */
+/* Fade Effect for Carousel Transition */
+/* Smooth Fade Transition for Carousel Items */
+.pet-carousel .carousel-item {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
+}
+
+.pet-carousel .carousel-item.active {
+  opacity: 1; /* Fully visible when active */
+  transition: opacity 0.5s ease-in-out; /* Matches the fade effect */
 }
 
 .team-section {
@@ -181,4 +256,17 @@
 
 .team-card .card-subtitle {
   font-size: 0.9rem;
+}
+/* Title Styling for "This is Our Friends" */
+.friends-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3); /* Subtle neon glow */
+  transition: text-shadow 0.3s ease;
+}
+
+.friends-title:hover {
+  text-shadow: 0px 0px 12px #ffffff, 0px 0px 24px #ffffff; /* Enhanced neon glow on hover */
+  transition: text-shadow 0.3s ease;
 }

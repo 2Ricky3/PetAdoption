@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Carousel, Card, Button, Container, Row, Col } from 'react-bootstrap';
+import { Carousel, Card, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import NavbarComponent from './NavbarComponent';
 import FooterComponent from './FooterComponent';
 import logo from '../assets/logo.png';
@@ -10,6 +10,7 @@ const HomePage = () => {
   const [pets, setPets] = useState([]);
   const [heartAnimation, setHeartAnimation] = useState({});
   const [sortedPets, setSortedPets] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -39,6 +40,14 @@ const HomePage = () => {
   const sortByAge = () => {
     const sorted = [...sortedPets].sort((a, b) => a.age - b.age);
     setSortedPets(sorted);
+  };
+
+  const handleAdoptClick = () => {
+    setShowModal(true); // Show modal on adopt click
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false); // Hide modal on OK click
   };
 
   return (
@@ -80,6 +89,11 @@ const HomePage = () => {
         </Row>
       </Container>
 
+      {/* Title Section */}
+      <Container className="text-center my-5">
+        <h2 className="friends-title">This is Our Furry Friends</h2>
+      </Container>
+
       {/* Filter Buttons */}
       <Container className="text-center my-5">
         <Button className="filter-btn mx-2" onClick={sortAlphabetically}>Sort A-Z</Button>
@@ -102,7 +116,7 @@ const HomePage = () => {
                         <Card.Text>Age: {pet.age}</Card.Text>
                         <div className="d-flex justify-content-around">
                           <Button className="btn-custom" onClick={() => handleLike(pet._id)}>Like</Button>
-                          <Button className="btn-custom">Adopt</Button>
+                          <Button className="btn-custom" onClick={handleAdoptClick}>Adopt</Button>
                         </div>
                         {heartAnimation[pet._id] && <div className="heart-animation"></div>}
                       </Card.Body>
@@ -114,6 +128,14 @@ const HomePage = () => {
           ))}
         </Carousel>
       </Container>
+
+      {/* Modal for Adopt Confirmation */}
+      <Modal show={showModal} onHide={handleCloseModal} centered>
+        <Modal.Body className="text-center">
+          <h4>We will send you an email soon!</h4>
+          <Button className="btn-custom mt-3" onClick={handleCloseModal}>OK</Button>
+        </Modal.Body>
+      </Modal>
 
       {/* Team Section */}
       <Container className="text-center my-5 pt-5 team-section">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import NavbarComponent from './NavbarComponent'; // Ensure the Navbar is included
+import FooterComponent from './FooterComponent'; // Ensure Footer is included
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { FaUpload } from 'react-icons/fa'; // Icon for file upload
@@ -112,6 +113,7 @@ const PublishPage = () => {
           <p className="small-text">Ts & Cs Apply. Based in South Africa.</p>
         </form>
       </StyledWrapper>
+      <FooterComponent /> {/* Add Footer */}
     </div>
   );
 };
