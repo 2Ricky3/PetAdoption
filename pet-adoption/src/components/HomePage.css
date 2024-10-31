@@ -141,65 +141,61 @@
 
 /* Heart Animation */
 .heart-animation {
-  width: 20px;
-  height: 20px;
   position: absolute;
-  bottom: 50px;
+  top: -20px; /* Position it above the Like button */
   left: 50%;
-  transform: translateX(-50%) rotate(-45deg);
-  background: rgb(211, 77, 77);
-  clip-path: Heart(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  transform: translateX(-50%) scale(0);
+  color: red;
+  font-size: 24px;
   animation: pop-heart 1s ease-in-out forwards;
+  opacity: 0; /* Start transparent */
 }
 
 @keyframes pop-heart {
   0% {
-    opacity: 0;
-    transform: scale(0) translateY(0);
+    transform: translateX(-50%) scale(0);
+    opacity: 1;
   }
   50% {
-    opacity: 1;
-    transform: scale(1.5) translateY(-10px);
+    transform: translateX(-50%) scale(1.5);
   }
   100% {
-    opacity: 0;
-    transform: scale(1) translateY(-30px);
+    transform: translateX(-50%) scale(1);
+    opacity: 0; /* Fade out at the end */
   }
 }
 
 /* Carousel */
 
-/* Enhanced Carousel Indicator Styling */
-/* Ball-style Carousel Indicator Styling */
-/* Refined Carousel Indicator Styling */
 .pet-carousel .carousel-indicators {
   position: static;
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 10px; /* Space between indicators for better separation */
+  gap: 10px; /* Space between indicators */
 }
 
 .pet-carousel .carousel-indicators li {
   background-color: rgba(255, 255, 255, 0.5); /* Light, semi-transparent color */
-  width: 12px;
+  width: 12px; /* Adjust size for smaller circles */
   height: 12px;
-  border-radius: 50%; /* Circular shape */
+  border-radius: 50%; /* Make them circular */
   transition: background-color 0.3s ease, transform 0.3s ease;
   cursor: pointer;
 }
 
 .pet-carousel .carousel-indicators li:hover {
-  background-color: rgba(255, 255, 255, 0.8); /* Slightly brighter on hover */
+  background-color: rgba(255, 255, 255, 0.8); /* Brighter on hover */
 }
 
 .pet-carousel .carousel-indicators .active {
-  background-color: #ffffff; /* Solid color for the active indicator */
+  background-color: #ffffff; /* Solid color for active indicator */
   width: 14px;
-  height: 14px; /* Slightly larger size for active indicator */
-  transform: scale(1.2); /* Enlarged appearance for the active indicator */
+  height: 14px;
+  transform: scale(1.2); /* Slightly larger for active indicator */
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.6); /* Subtle glow effect */
 }
+
 
 
 /* Carousel Container Styling */
@@ -215,7 +211,7 @@
 /* Smooth Fade Transition for Carousel Items */
 .pet-carousel .carousel-item {
   opacity: 0;
-  transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
+  transition: opacity 0.3s ease-in-out; /* Smooth fade transition */
 }
 
 .pet-carousel .carousel-item.active {
@@ -231,13 +227,15 @@
 .team-card {
   border-radius: 10px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  padding: 20px; /* Added padding inside team cards */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s ease;
+  padding: 20px;
 }
 
 .team-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5); /* Neon glow on hover */
+  text-shadow: 0px 0px 12px #ffffff, 0px 0px 24px #ffffff; /* Text glow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s ease;
 }
 
 .team-image {
@@ -270,3 +268,23 @@
   text-shadow: 0px 0px 12px #ffffff, 0px 0px 24px #ffffff; /* Enhanced neon glow on hover */
   transition: text-shadow 0.3s ease;
 }
+/* Widen the Pet Carousel */
+/* Widen the Pet Carousel */
+.wider-carousel .pet-carousel {
+  max-width: 90%; /* Adjust this percentage as needed */
+  margin: 0 auto; /* Center the carousel */
+}
+
+/* Style for non-profit statement */
+.company-info {
+  font-size: 1.2rem;
+  color: white;
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3); /* Subtle neon glow */
+  transition: text-shadow 0.3s ease;
+}
+
+.company-info:hover {
+  text-shadow: 0px 0px 12px #ffffff, 0px 0px 24px #ffffff; /* Enhanced neon glow on hover */
+  transition: text-shadow 0.3s ease;
+}
+

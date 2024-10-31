@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Carousel, Card, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import NavbarComponent from './NavbarComponent';
 import FooterComponent from './FooterComponent';
+import { FaHeart } from 'react-icons/fa';
 import logo from '../assets/logo.png';
 import './HomePage.css';
 
@@ -43,11 +44,11 @@ const HomePage = () => {
   };
 
   const handleAdoptClick = () => {
-    setShowModal(true); // Show modal on adopt click
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    setShowModal(false); // Hide modal on OK click
+    setShowModal(false);
   };
 
   return (
@@ -101,7 +102,7 @@ const HomePage = () => {
       </Container>
 
       {/* Pet Carousel with 4 pets per slide */}
-      <Container className="my-5 pb-5">
+      <Container className="my-5 pb-5 wider-carousel">
         <Carousel indicators={true} interval={3000} className="pet-carousel" controls={false} wrap={true}>
           {Array.from({ length: Math.ceil(sortedPets.length / 4) }).map((_, pageIndex) => (
             <Carousel.Item key={pageIndex}>
@@ -110,15 +111,18 @@ const HomePage = () => {
                   <Col key={pet._id} md={3} className="mb-4">
                     <Card className="pet-card">
                       <Card.Img variant="top" src={`http://localhost:5000/${pet.image}`} className="card-image" />
-                      <Card.Body className="text-center">
+                      <Card.Body className="text-center position-relative">
                         <Card.Title>{pet.name}</Card.Title>
                         <Card.Text>Breed: {pet.breed}</Card.Text>
                         <Card.Text>Age: {pet.age}</Card.Text>
-                        <div className="d-flex justify-content-around">
+                        <div className="d-flex justify-content-around position-relative">
                           <Button className="btn-custom" onClick={() => handleLike(pet._id)}>Like</Button>
                           <Button className="btn-custom" onClick={handleAdoptClick}>Adopt</Button>
                         </div>
-                        {heartAnimation[pet._id] && <div className="heart-animation"></div>}
+                        {/* Heart animation icon */}
+                        {heartAnimation[pet._id] && (
+                          <FaHeart className="heart-animation" />
+                        )}
                       </Card.Body>
                     </Card>
                   </Col>
@@ -138,9 +142,12 @@ const HomePage = () => {
       </Modal>
 
       {/* Team Section */}
-      <Container className="text-center my-5 pt-5 team-section">
+           <Container className="text-center my-5 pt-5 team-section">
         <h2 className="welcome-text mb-5">Meet Our Team</h2>
-        <Row className="gy-4">
+        <p className="company-info mt-4">
+          Pen Pets is a non-profit organization dedicated to finding homes for pets in need. Our hard work and commitment are focused solely on helping animals find loving families.
+        </p>
+        <Row className="gy-4 mt-4">
           <Col md={4}>
             <Card className="team-card h-100">
               <Card.Img variant="top" src={require('../assets/SaraMartinez.jpg')} className="team-image" />
@@ -179,6 +186,7 @@ const HomePage = () => {
           </Col>
         </Row>
       </Container>
+
 
       <FooterComponent />
     </div>
