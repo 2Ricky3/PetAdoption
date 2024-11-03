@@ -6,7 +6,7 @@ const PetList = () => {
 
   useEffect(() => {
     const fetchPets = async () => {
-      const response = await axios.get('http://localhost:5000/api/pets');
+      const response = await axios.get('https://penpets.oa.r.appspot.com/api/pets');
       setPets(response.data);
     };
     fetchPets();

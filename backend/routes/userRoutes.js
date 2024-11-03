@@ -29,11 +29,11 @@ router.post('/admin/login', async (req, res) => {
 
     const isPasswordCorrect = await bcrypt.compare(password, admin.password);
     if (!isPasswordCorrect) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.status(400).json({ message: 'Invalid email or password' });
     }
 
     // Generate JWT for admin
-    const token = jwt.sign({ email: admin.email, id: admin._id }, 'your_jwt_secret_key', { expiresIn: '1h' });
+    const token = jwt.sign({ email: admin.email, id: admin._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.status(200).json({ result: admin, token });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in' });
@@ -72,11 +72,11 @@ router.post('/login', async (req, res) => {
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.status(400).json({ message: 'Invalid email or password' });
     }
 
     // Generate JWT
-    const token = jwt.sign({ email: user.email, id: user._id }, 'your_jwt_secret_key', { expiresIn: '1h' });
+    const token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.status(200).json({ result: user, token });
   } catch (error) {

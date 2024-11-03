@@ -1,0 +1,16 @@
+runtime: nodejs20
+instance_class: F1
+
+env_variables:
+  MONGODB_URI: "mongodb+srv://admin:2003@cluster0.nwsv0.mongodb.net/petAdoptionDB?retryWrites=true&w=majority"
+  JWT_SECRET: "your_jwt_secret_key_here"
+  PORT: "8080"
+
+automatic_scaling:
+  target_cpu_utilization: 0.65
+  target_throughput_utilization: 0.75
+  min_instances: 1
+  max_instances: 5
+
+entrypoint: node server.js
+

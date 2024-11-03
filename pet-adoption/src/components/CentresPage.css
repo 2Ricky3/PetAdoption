@@ -62,7 +62,6 @@
   object-fit: cover;
 }
 
-/* Adjust Button Placement */
 .centre-card .btn-secondary {
   background-color: #666;
   border: none;
@@ -70,21 +69,21 @@
   position: relative;
   bottom: 0;
   margin-top: 15px;
-  width: 100%; /* Make the button full width */
+  width: 100%; 
   text-align: center;
 }
 footer {
-  background-color: #2c2c2c; /* Match page background */
+  background-color: #2c2c2c; 
   color: white;
   text-align: center;
   padding: 15px 0;
   font-size: 14px;
 }
-/* Styling for expanded card */
+
 .expanded-card {
-  max-height: 500px; /* Set a max height for expanded card */
+  max-height: 500px; 
   transition: max-height 0.3s ease;
-  padding-bottom: 20px; /* Extra padding to accommodate the distance button */
+  padding-bottom: 20px; 
 }
 
 .read-more-toggle {

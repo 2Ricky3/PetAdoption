@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
-import logo from '../assets/logo.png'; // Importing the logo
+
+// Define backend URL
+const backendUrl = 'https://penpets.oa.r.appspot.com';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -12,7 +14,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', {
+      const response = await axios.post(`${backendUrl}/api/users/login`, {
         email,
         password,
       });
@@ -39,11 +41,10 @@ const LoginPage = () => {
 
       {/* Background logo */}
       <div className="background-logo">
-        <img src={logo} alt="Pen Pets Logo" className="background-image" />
+        <img src={`${process.env.PUBLIC_URL}/assets/logo.png`} alt="Pen Pets Logo" className="background-image" />
       </div>
 
       <form className="form" onSubmit={handleLogin}>
-        {/* Title added here */}
         <h1 className="form-title">Pen Pets</h1>
 
         <div className="flex-column">
@@ -85,7 +86,6 @@ const LoginPage = () => {
           Don&apos;t have an account? <Link to="/signup" className="span">Sign Up</Link>
         </p>
 
-        {/* Terms and conditions and location */}
         <p className="small-text">Terms and Conditions apply.</p>
         <p className="small-text">Based in South Africa</p>
       </form>
@@ -134,7 +134,7 @@ const StyledWrapper = styled.div`
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 0; /* Ensures the logo is behind the form */
+    z-index: 0;
     opacity: 0.1;
     width: 400px;
     height: 400px;
@@ -152,14 +152,12 @@ const StyledWrapper = styled.div`
     gap: 10px;
     background-color: #ffffff;
     padding: 30px;
-    width: 600px; /* Increased width for more room */
+    width: 600px;
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 1;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
-  /* Form title styling */
   .form-title {
     text-align: center;
     font-size: 32px;
@@ -169,7 +167,7 @@ const StyledWrapper = styled.div`
   }
 
   .flex-column label {
-    font-weight: bold; /* Bold label text for Email and Password */
+    font-weight: bold;
     font-size: 14px;
   }
 
@@ -186,7 +184,6 @@ const StyledWrapper = styled.div`
   .inputForm:focus-within {
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
   }
 
   .input {
@@ -199,35 +196,29 @@ const StyledWrapper = styled.div`
     outline: none;
   }
 
-.button-submit {
-  margin: 20px 0 10px 0;
-  background-color: #151717;
-  border: none;
-  color: white;
-  font-size: 15px;
-  font-weight: 500;
-  border-radius: 10px;
-  height: 50px;
-  width: 100%;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0); /* Initial state with no shadow */
-}
+  .button-submit {
+    margin: 20px 0 10px 0;
+    background-color: #151717;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    height: 50px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
 
-.button-submit:hover {
-  background-color: #505050; /* Dark grey on hover */
-  box-shadow: 0 0 10px rgba(128, 128, 128, 0.7), /* Subtle grey glow */
-              0 0 15px rgba(128, 128, 128, 0.5), 
-              0 0 20px rgba(128, 128, 128, 0.4); /* Reduced brightness */
-  color: white;
-}
-
+  .button-submit:hover {
+    background-color: #505050;
+    box-shadow: 0 0 10px rgba(128, 128, 128, 0.7), 0 0 15px rgba(128, 128, 128, 0.5);
+  }
 
   .p {
     text-align: center;
     color: grey;
     font-size: 14px;
-    margin: 5px 0;
   }
 
   .span {
@@ -238,12 +229,10 @@ const StyledWrapper = styled.div`
     text-decoration: none;
   }
 
-  /* Small text for terms and location */
   .small-text {
     text-align: center;
     font-size: 12px;
     color: grey;
-    margin-top: 5px;
   }
 `;
 

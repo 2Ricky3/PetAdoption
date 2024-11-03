@@ -1,33 +1,62 @@
+// Import necessary modules
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const userRoutes = require('./routes/userRoutes'); // Import user routes
-const petRoutes = require('./routes/petRoutes'); // Import pet routes
-const adminRoutes = require('./routes/adminRoutes'); // Import pet routes
 const path = require('path');
 
 
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+// Import routes
+const userRoutes = require('./routes/userRoutes'); // Import user routes
+const petRoutes = require('./routes/petRoutes'); // Import pet routes
+const adminRoutes = require('./routes/adminRoutes'); // Import admin routes
 
-// MongoDB connection
-mongoose.connect('mongodb+srv://admin:2003@cluster0.nwsv0.mongodb.net/petAdoptionDB?retryWrites=true&w=majority', {
+// Initialize express app
+const app = express();
+
+// Middleware
+app.use(express.json()); // Parse JSON bodies
+app.use(cors()); // Enable CORS
+
+// Set Content Security Policy headers to secure the app
+app.use((req, res, next) => {
+  res.setHeader("Content-Security-Policy", "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com");
+  next();
+});
+
+
+// MongoDB connection using Mongoose
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-})
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+}).then(() => {
+  console.log("MongoDB connected");
+}).catch((err) => {
+  console.error("MongoDB connection error:", err);
+});
 
-// Routes
-app.use('/api/users', userRoutes); // User routes
-app.use('/api/pets', petRoutes); // This should match the API call in the frontend
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// API Routes
+app.use('/api/users', userRoutes);
+app.use('/api/pets', petRoutes);
 app.use('/api/admin', adminRoutes);
 
+// Serve static files from the 'uploads' directory for image or file uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-const PORT = process.env.PORT || 5000;
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+
+// Serve static files from the React frontend build folder
+
+app.use(express.static(path.join(__dirname,'build')));
+
+// Catch-all handler to serve React frontend for unknown routes
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname,'build', 'index.html'));
+});
+
+// Start the server
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

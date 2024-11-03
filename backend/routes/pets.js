@@ -1,25 +1,28 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const Pet = require('../models/Pet');  // Assuming you have a Pet model
-
+const Pet = require('../models/Pet'); // Assuming you have a Pet model
 
 const router = express.Router();
 
 // Set up multer storage for image uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/');  // Directory for saving uploaded images
+    cb(null, 'uploads/'); // Directory for saving uploaded images
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));  // Unique filename with timestamp
+    cb(null, Date.now() + path.extname(file.originalname)); // Unique filename with timestamp
   }
 });
 
 const upload = multer({ storage: storage });
 
 // POST route to handle publishing pets with images
-router.post('/api/pets', upload.single('image'), async (req, res) => {
+router.post('/', upload.single('image'), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'Image file is required' });
+  }
+
   try {
     const { name, age, breed } = req.body;
 
@@ -27,7 +30,7 @@ router.post('/api/pets', upload.single('image'), async (req, res) => {
       name,
       age,
       breed,
-      image: req.file.filename  // Save the filename of the image
+      image: `uploads/${req.file.filename}` // Save the relative path for the image
     });
 
     await pet.save();
@@ -39,7 +42,7 @@ router.post('/api/pets', upload.single('image'), async (req, res) => {
 });
 
 // GET route to retrieve the list of pets
-router.get('/api/pets', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const pets = await Pet.find();
     res.status(200).json(pets);

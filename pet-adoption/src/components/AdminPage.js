@@ -13,14 +13,14 @@ const AdminPage = () => {
   useEffect(() => {
     // Check if the admin is logged in
     if (localStorage.getItem('isAdmin') !== 'true') {
-      navigate('/adminlogin'); // Redirect to login page if not logged in as admin
+      navigate('/adminlogin'); 
       return;
     }
 
     const fetchData = async () => {
       try {
-        const usersResponse = await axios.get(`http://localhost:5000/api/admin/users?password=${password}`);
-        const petsResponse = await axios.get(`http://localhost:5000/api/admin/pets?password=${password}`);
+        const usersResponse = await axios.get(`https://penpets.oa.r.appspot.com/api/admin/users?password=${password}`);
+        const petsResponse = await axios.get(`https://penpets.oa.r.appspot.com/api/admin/pets?password=${password}`);        
         setUsers(usersResponse.data);
         setPets(petsResponse.data);
       } catch (error) {
@@ -32,7 +32,7 @@ const AdminPage = () => {
 
   const handleDeleteUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/admin/users/${id}?password=${password}`);
+      await axios.delete(`https://penpets.oa.r.appspot.com/api/admin/users/${id}?password=${password}`);
       setUsers(users.filter(user => user._id !== id));
     } catch (error) {
       console.error('Error deleting user:', error);
@@ -41,7 +41,7 @@ const AdminPage = () => {
 
   const handleDeletePet = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/admin/pets/${id}?password=${password}`);
+      await axios.delete(`https://penpets.oa.r.appspot.com/api/admin/pets/${id}?password=${password}`);
       setPets(pets.filter(pet => pet._id !== id));
     } catch (error) {
       console.error('Error deleting pet:', error);

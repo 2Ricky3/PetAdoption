@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { Carousel, Card, Button, Container, Row, Col, Modal } from 'react-bootstrap';
 import NavbarComponent from './NavbarComponent';
 import FooterComponent from './FooterComponent';
 import { FaHeart } from 'react-icons/fa';
-import logo from '../assets/logo.png';
 import './HomePage.css';
+
+const backendUrl = 'https://penpets.oa.r.appspot.com';
 
 const HomePage = () => {
   const [pets, setPets] = useState([]);
@@ -14,9 +17,14 @@ const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+
     const fetchPets = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/pets');
+        const response = await axios.get(`${backendUrl}/api/pets`);
         setPets(response.data);
         setSortedPets(response.data);
       } catch (error) {
@@ -56,8 +64,8 @@ const HomePage = () => {
       <NavbarComponent />
 
       {/* Welcome Section */}
-      <Container className="text-center my-5 welcome-section">
-        <img src={logo} alt="Logo" className="background-logo" />
+      <Container className="text-center my-5 welcome-section" data-aos="fade-up">
+        <img src={`${process.env.PUBLIC_URL}/assets/logo.png`} alt="Logo" className="background-logo" />
         <h1 className="welcome-text">Welcome to Pen Pets</h1>
         <p className="subtext">
           Your friendly pet adoption application where you can freely browse, like, and adopt pets looking for a loving home.
@@ -67,7 +75,7 @@ const HomePage = () => {
       {/* Mission and Vision Cards */}
       <Container className="my-5 pb-5">
         <Row className="gy-4">
-          <Col md={6}>
+          <Col md={6} data-aos="fade-right">
             <Card className="h-100 mission-vision-card">
               <Card.Body>
                 <Card.Title className="text-center">Our Mission</Card.Title>
@@ -77,7 +85,7 @@ const HomePage = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={6}>
+          <Col md={6} data-aos="fade-left">
             <Card className="h-100 mission-vision-card">
               <Card.Body>
                 <Card.Title className="text-center">Our Vision</Card.Title>
@@ -91,26 +99,26 @@ const HomePage = () => {
       </Container>
 
       {/* Title Section */}
-      <Container className="text-center my-5">
+      <Container className="text-center my-5" data-aos="fade-up">
         <h2 className="friends-title">This is Our Furry Friends</h2>
       </Container>
 
       {/* Filter Buttons */}
-      <Container className="text-center my-5">
+      <Container className="text-center my-5" data-aos="fade-up">
         <Button className="filter-btn mx-2" onClick={sortAlphabetically}>Sort A-Z</Button>
         <Button className="filter-btn mx-2" onClick={sortByAge}>Sort by Age</Button>
       </Container>
 
       {/* Pet Carousel with 4 pets per slide */}
-      <Container className="my-5 pb-5 wider-carousel">
+      <Container className="my-5 pb-5 wider-carousel" data-aos="fade-up">
         <Carousel indicators={true} interval={3000} className="pet-carousel" controls={false} wrap={true}>
           {Array.from({ length: Math.ceil(sortedPets.length / 4) }).map((_, pageIndex) => (
             <Carousel.Item key={pageIndex}>
               <Row className="justify-content-center">
                 {sortedPets.slice(pageIndex * 4, pageIndex * 4 + 4).map((pet) => (
                   <Col key={pet._id} md={3} className="mb-4">
-                    <Card className="pet-card">
-                      <Card.Img variant="top" src={`http://localhost:5000/${pet.image}`} className="card-image" />
+                    <Card className="pet-card" data-aos="zoom-in">
+                      <Card.Img variant="top" src={`${backendUrl}/${pet.image}`} className="card-image" />
                       <Card.Body className="text-center position-relative">
                         <Card.Title>{pet.name}</Card.Title>
                         <Card.Text>Breed: {pet.breed}</Card.Text>
@@ -142,15 +150,15 @@ const HomePage = () => {
       </Modal>
 
       {/* Team Section */}
-           <Container className="text-center my-5 pt-5 team-section">
+      <Container className="text-center my-5 pt-5 team-section" data-aos="fade-up">
         <h2 className="welcome-text mb-5">Meet Our Team</h2>
         <p className="company-info mt-4">
           Pen Pets is a non-profit organization dedicated to finding homes for pets in need. Our hard work and commitment are focused solely on helping animals find loving families.
         </p>
         <Row className="gy-4 mt-4">
-          <Col md={4}>
+          <Col md={4} data-aos="flip-left">
             <Card className="team-card h-100">
-              <Card.Img variant="top" src={require('../assets/SaraMartinez.jpg')} className="team-image" />
+              <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/assets/SaraMartinez.jpg`} className="team-image" />
               <Card.Body>
                 <Card.Title>Alex Johnson</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">Founder & CEO</Card.Subtitle>
@@ -160,9 +168,9 @@ const HomePage = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4}>
+          <Col md={4} data-aos="flip-up">
             <Card className="team-card h-100">
-              <Card.Img variant="top" src={require('../assets/AlexJohnson.jpg')} className="team-image" />
+              <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/assets/AlexJohnson.jpg`} className="team-image" />
               <Card.Body>
                 <Card.Title>Sara Martinez</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">Head of Marketing</Card.Subtitle>
@@ -172,9 +180,9 @@ const HomePage = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md={4}>
+          <Col md={4} data-aos="flip-right">
             <Card className="team-card h-100">
-              <Card.Img variant="top" src={require('../assets/TomGreen.jpg')} className="team-image" />
+              <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/assets/TomGreen.jpg`} className="team-image" />
               <Card.Body>
                 <Card.Title>Tom Green</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">Operations Manager</Card.Subtitle>
@@ -186,7 +194,6 @@ const HomePage = () => {
           </Col>
         </Row>
       </Container>
-
 
       <FooterComponent />
     </div>

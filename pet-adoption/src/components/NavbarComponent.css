@@ -26,9 +26,9 @@
 .ml-auto .nav-link {
   color: white !important;
   font-size: 1.1rem;
-  margin: 0 1.5rem; /* Increased padding between links */
+  margin: 0 1.5rem; 
   position: relative;
-  transition: color 0.3s ease; /* Smooth transition for text color */
+  transition: color 0.3s ease; 
 }
 
 .ml-auto .nav-link::after {
@@ -37,14 +37,14 @@
   width: 0;
   height: 2px;
   background: white;
-  transition: width 0.3s ease; /* Smooth underline effect */
+  transition: width 0.3s ease; 
   position: absolute;
   bottom: -5px;
   left: 0;
 }
 
 .ml-auto .nav-link:hover::after {
-  width: 100%; /* Expand underline on hover */
+  width: 100%; 
 }
 
 .active-link {
@@ -53,7 +53,7 @@
 }
 
 .active-link::after {
-  width: 100%; /* Keeps underline for active link */
+  width: 100%; 
 }
 
 button {

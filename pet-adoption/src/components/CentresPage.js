@@ -12,7 +12,7 @@ const CentresPage = () => {
       services: 'Pet training, grooming, health checkups',
       contact: 'fisher@pets.co.za | 087 0956 2334',
       distance: 12,
-      image: require('../assets/download (5).jpg'),
+      image: `${process.env.PUBLIC_URL}/assets/download (5).jpg`,
     },
     {
       name: 'Paws Centre',
@@ -20,7 +20,7 @@ const CentresPage = () => {
       services: 'Adoption events, pet behavior workshops',
       contact: 'paws@centre.co.za | 082 555 6432',
       distance: 18,
-      image: require('../assets/download (6).jpg'),
+      image: `${process.env.PUBLIC_URL}/assets/download (6).jpg`,
     },
     {
       name: 'Tri-City Centre',
@@ -28,10 +28,10 @@ const CentresPage = () => {
       services: 'Veterinary services, pet supplies',
       contact: 'tricity@pretoria.co.za | 071 854 5777',
       distance: 25,
-      image: require('../assets/download (7).jpg'),
+      image: `${process.env.PUBLIC_URL}/assets/download (7).jpg`,
     },
   ];
-
+  
   const [centres, setCentres] = useState(initialCentres);
   const [showMore, setShowMore] = useState({});
 

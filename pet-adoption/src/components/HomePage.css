@@ -3,29 +3,29 @@
 .welcome-section {
   position: relative;
   z-index: 1;
-  padding-top: 60px; /* Adds space for the logo */
+  padding-top: 60px; 
 }
 
 .background-logo {
   position: absolute;
-  top: -30px; /* Move the logo above the welcome text */
+  top: -30px; 
   left: 50%;
   transform: translateX(-50%);
-  opacity: 0.2; /* Lightens the logo so it doesn’t overwhelm the text */
-  width: 100px; /* Adjusts the size as needed */
-  z-index: -1; /* Ensures the logo stays behind the text */
+  opacity: 0.2; 
+  width: 100px; 
+  z-index: -1; 
 }
 
 /* Welcome Text and Subtext */
 .welcome-text, .subtext {
   color: white;
   font-weight: bold;
-  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3); /* Subtle glow */
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3); 
 }
 
 .welcome-text:hover, .subtext:hover {
-  color: #ffffff; /* Keeps text white on hover */
-  text-shadow: 0px 0px 12px #ffffff, 0px 0px 24px #ffffff; /* Neon glow effect */
+  color: #ffffff;
+  text-shadow: 0px 0px 12px #ffffff, 0px 0px 24px #ffffff; 
   transition: text-shadow 0.3s ease;
 }
 
@@ -41,13 +41,11 @@
 }
 
 /* Pet Card Styling */
-/* Enhanced Pet Card Styling */
-/* Pet Card Styling within Carousel */
 .pet-card {
-  width: 14rem; /* Slightly smaller width to fit carousel */
+  width: 14rem; 
   border-radius: 15px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
-  margin: 15px auto; /* Extra margin between cards */
+  margin: 15px auto; 
   overflow: hidden;
   background-color: #2a2a2a;
   color: #ffffff;
@@ -55,24 +53,24 @@
 }
 
 .pet-card:hover {
-  transform: translateY(-5px) scale(1.03); /* Slightly larger hover scale */
+  transform: translateY(-5px) scale(1.03); 
   box-shadow: 0px 6px 25px rgba(255, 255, 255, 0.25);
 }
 
 
-/* Card Image Styling */
+
 /* Card Image Styling */
 .card-image {
   height: 180px;
   width: 100%;
   object-fit: cover;
   border-radius: 15px 15px 0 0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .pet-card:hover .card-image {
-  transform: scale(1.05); /* Subtle zoom on hover */
-  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3); /* Light shadow on hover */
+  transform: scale(1.05); 
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);  
 }
 
 /* Centered and Enhanced Text */
@@ -81,11 +79,11 @@
   font-weight: bold;
   margin-top: 10px;
   color: #4d4d4d;
-  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.3); /* Subtle glow */
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.3); 
 }
 
 .pet-card .card-text {
-  color: #505050; /* Softer color for text details */
+  color: #505050; 
   margin: 5px 0;
 }
 
@@ -101,8 +99,8 @@
 }
 
 .pet-card .btn-custom:hover {
-  background-color: #333333 !important; /* Darker shade on hover */
-  transform: translateY(-3px); /* Slight lift on hover */
+  background-color: #333333 !important; 
+  transform: translateY(-3px); 
 }
 
 
@@ -122,8 +120,8 @@
 
 /* Filter Button Styling */
 .filter-btn {
-  background-color: white !important; /* Force white background */
-  color: rgb(43, 43, 43) !important; /* Dark text color */
+  background-color: white !important; 
+  color: rgb(43, 43, 43) !important;
   border: 1px solid grey !important;
   padding: 0.5em 1em;
   margin: 0 0.5em;
@@ -142,13 +140,13 @@
 /* Heart Animation */
 .heart-animation {
   position: absolute;
-  top: -20px; /* Position it above the Like button */
+  top: -20px; 
   left: 50%;
   transform: translateX(-50%) scale(0);
   color: red;
   font-size: 24px;
   animation: pop-heart 1s ease-in-out forwards;
-  opacity: 0; /* Start transparent */
+  opacity: 0;
 }
 
 @keyframes pop-heart {
@@ -161,7 +159,7 @@
   }
   100% {
     transform: translateX(-50%) scale(1);
-    opacity: 0; /* Fade out at the end */
+    opacity: 0; 
   }
 }
 
@@ -172,56 +170,55 @@
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 10px; /* Space between indicators */
+  gap: 10px; 
 }
 
 .pet-carousel .carousel-indicators li {
-  background-color: rgba(255, 255, 255, 0.5); /* Light, semi-transparent color */
-  width: 12px; /* Adjust size for smaller circles */
+  background-color: rgba(255, 255, 255, 0.5); 
+  width: 12px; 
   height: 12px;
-  border-radius: 50%; /* Make them circular */
+  border-radius: 50%; 
   transition: background-color 0.3s ease, transform 0.3s ease;
   cursor: pointer;
 }
 
 .pet-carousel .carousel-indicators li:hover {
-  background-color: rgba(255, 255, 255, 0.8); /* Brighter on hover */
+  background-color: rgba(255, 255, 255, 0.8); 
 }
 
 .pet-carousel .carousel-indicators .active {
-  background-color: #ffffff; /* Solid color for active indicator */
+  background-color: #ffffff; 
   width: 14px;
   height: 14px;
-  transform: scale(1.2); /* Slightly larger for active indicator */
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6); /* Subtle glow effect */
+  transform: scale(1.2); 
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6); 
 }
 
 
 
 /* Carousel Container Styling */
 .pet-carousel {
-  background-color: #2a2a2a; /* Match carousel background with card color for a seamless look */
-  border-radius: 15px; /* Rounded corners for a softer look */
-  padding: 30px; /* Adds padding to create space around cards */
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  background-color: #2a2a2a; 
+  border-radius: 15px; 
+  padding: 30px; 
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); 
 }
 
-/* Carousel Item Adjustments */
-/* Fade Effect for Carousel Transition */
+
 /* Smooth Fade Transition for Carousel Items */
 .pet-carousel .carousel-item {
   opacity: 0;
-  transition: opacity 0.3s ease-in-out; /* Smooth fade transition */
+  transition: opacity 0.3s ease-in-out; 
 }
 
 .pet-carousel .carousel-item.active {
-  opacity: 1; /* Fully visible when active */
-  transition: opacity 0.5s ease-in-out; /* Matches the fade effect */
+  opacity: 1; 
+  transition: opacity 0.5s ease-in-out; 
 }
 
 .team-section {
-  margin-top: 60px; /* Increased top margin for spacing above team section */
-  margin-bottom: 60px; /* Increased bottom margin for spacing below team section */
+  margin-top: 60px; 
+  margin-bottom: 60px; 
 }
 
 .team-card {
@@ -233,8 +230,8 @@
 
 .team-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5); /* Neon glow on hover */
-  text-shadow: 0px 0px 12px #ffffff, 0px 0px 24px #ffffff; /* Text glow */
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5); 
+  text-shadow: 0px 0px 12px #ffffff, 0px 0px 24px #ffffff; 
   transition: transform 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s ease;
 }
 

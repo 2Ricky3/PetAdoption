@@ -8,11 +8,11 @@ const AdminLogin = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Check if the password is correct
+    
     if (password === '2003') {
-      // Store a flag in localStorage to indicate admin is logged in
+  
       localStorage.setItem('isAdmin', 'true');
-      navigate('/admin'); // Redirect to the admin dashboard
+      navigate('/admin'); 
     } else {
       alert('Invalid password. Access denied.');
     }
@@ -35,8 +35,6 @@ const AdminLogin = () => {
       </form>
     </div>
   );
-  
 };
-console.log("AdminLogin component rendered");
 
 export default AdminLogin;

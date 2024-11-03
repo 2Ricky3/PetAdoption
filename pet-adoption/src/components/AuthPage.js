@@ -5,12 +5,9 @@ import SignUpPage from './SignUpPage';
 import './AuthPage.css';
 
 const AuthPage = () => {
-  const [isLogin, setIsLogin] = useState(true); // State to switch between login and signup
-  const navigate = useNavigate();
-
+  const [isLogin, setIsLogin] = useState(true); 
   const handleSwitchToSignUp = () => {
     setIsLogin(false);
-    navigate('/signup'); // Redirect to signup page
   };
 
   return (

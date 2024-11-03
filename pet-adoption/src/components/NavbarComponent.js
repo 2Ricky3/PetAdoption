@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
-import { useNavigate, useLocation } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import './NavbarComponent.css';
 
 const NavbarComponent = () => {
@@ -16,9 +15,9 @@ const NavbarComponent = () => {
 
   return (
     <Navbar className="custom-navbar">
-      <Navbar.Brand href="/home" className="navbar-brand-custom">
+      <Navbar.Brand onClick={() => navigate('/home')} className="navbar-brand-custom">
         <img
-          src={logo}
+          src={`${process.env.PUBLIC_URL}/assets/logo.png`}
           width="70"
           height="70"
           className="d-inline-block align-top logo-image"
@@ -27,9 +26,15 @@ const NavbarComponent = () => {
         <span className="brand-text">Pen Pets</span>
       </Navbar.Brand>
       <Nav className="ml-auto">
-        <Nav.Link href="/publish" className={location.pathname === '/publish' ? 'active-link' : ''}>Publish</Nav.Link>
-        <Nav.Link href="/home" className={location.pathname === '/home' ? 'active-link' : ''}>Browse</Nav.Link>
-        <Nav.Link href="/centres" className={location.pathname === '/centres' ? 'active-link' : ''}>Centres</Nav.Link>
+        <Nav.Link onClick={() => navigate('/publish')} className={location.pathname === '/publish' ? 'active-link' : ''}>
+          Publish
+        </Nav.Link>
+        <Nav.Link onClick={() => navigate('/home')} className={location.pathname === '/home' ? 'active-link' : ''}>
+          Browse
+        </Nav.Link>
+        <Nav.Link onClick={() => navigate('/centres')} className={location.pathname === '/centres' ? 'active-link' : ''}>
+          Centres
+        </Nav.Link>
         <Button variant="outline-light" onClick={handleLogout}>Logout</Button>
       </Nav>
     </Navbar>

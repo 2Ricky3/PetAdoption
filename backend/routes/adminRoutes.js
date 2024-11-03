@@ -3,7 +3,8 @@ const router = express.Router();
 const User = require('../models/User');
 const Pet = require('../models/Pet');
 
-const ADMIN_PASSWORD = '2003';
+// Use environment variable for admin password
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // Admin Login Route
 router.post('/login', (req, res) => {

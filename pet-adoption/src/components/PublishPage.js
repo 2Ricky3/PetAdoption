@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { FaUpload, FaPaw, FaCalendarAlt, FaDog } from 'react-icons/fa';
 
+
 const PublishPage = () => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
@@ -23,7 +24,7 @@ const PublishPage = () => {
     formData.append('image', image);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/pets/publish', formData, {
+      const response = await axios.post(`/api/pets/publish`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
