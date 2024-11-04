@@ -39,6 +39,11 @@ My mission with PenPets is simple: Connect pets in need with people who can offe
 --- 
 
 ## 🎨 **Wireframes & Final Design**
+![Home Page-1](https://github.com/user-attachments/assets/b9b77d9f-9b2a-4700-b67e-57f6e39bc4a2)
+![Home Page](https://github.com/user-attachments/assets/c4e8f013-7cda-479c-96d1-84937275b35f)
+![Sign Up page](https://github.com/user-attachments/assets/67acf0d7-b971-403b-aac5-75485fe12dcf)
+![Profile Page](https://github.com/user-attachments/assets/4fbadc15-eccd-4d00-a78e-e10cdc6ddcbf)
+
 ### **Wireframes**
 I initially created wireframes to sketch out PenPets' flow and functionality. Below are examples of the core screens that shaped our vision:
 - **Home Page**: Where users can browse pets.
@@ -49,24 +54,13 @@ I initially created wireframes to sketch out PenPets' flow and functionality. Be
 ---
   
 ### **Final Design**
+![Screenshot 2024-11-04 101810](https://github.com/user-attachments/assets/16cd6e3e-5779-4003-b811-3c665094e9ad)
+![Screenshot 2024-11-04 101820](https://github.com/user-attachments/assets/8a8383ff-0321-4404-949d-39d53a202d98)
+![Screenshot 2024-11-04 101830](https://github.com/user-attachments/assets/3736c3ae-f4ec-4a47-96ee-c816d3df7259)
+![Screenshot 2024-11-04 101737](https://github.com/user-attachments/assets/c985b584-2702-4b44-b023-40a32a191dad)
 
 ### Final Design Screens
 
-**Adoption Centers**
-
-<img src="./assets/Screenshot%202024-11-04%20101810.png" alt="Adoption Centers" width="600"/>
-
-**Home Page**
-
-<img src="./assets/Screenshot%202024-11-04%20101820.png" alt="Home Page" width="600"/>
-
-**Login Page**
-
-<img src="./assets/Screenshot%202024-11-04%20101737.png" alt="Login Page" width="600"/>
-
-**Pet Publishing**
-
-<img src="./assets/Screenshot%202024-11-04%20101830.png" alt="Pet Publishing" width="600"/>
 
 
 - **Visual Hierarchy**: Clean layout that highlights important information.
