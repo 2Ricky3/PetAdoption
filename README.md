@@ -3,9 +3,9 @@
 ## 📑 **Table of Contents**
 - [Project Story](#project-story)
 - [Key Features](#key-features)
-- [Wireframes & Final Design](#wireframes--final-design)
-- [Challenges & Learnings](#challenges--learnings)
-- [Deployment & Setup](#deployment--setup)
+- [Wireframes & Final Design](#wireframes-final-design)
+- [Challenges & Learnings](#challenges-learnings)
+- [Deployment & Setup](#deployment-setup)
 - [Technologies Used](#technologies-used)
 - [A Final Note](#a-final-note)
 
